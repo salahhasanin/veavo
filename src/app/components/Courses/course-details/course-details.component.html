@@ -1,0 +1,339 @@
+<div class="container">
+  <div class="courseDetails mt-5">
+    <div class="row" *ngFor="let eachIntro of intro">
+      <!-- col-xl-4 col-lg-5 col-md-5 col-sm-3 col-3 -->
+      <div class="col-xl-1 col-lg-2 col-md-2 col-sm-12 col-12 smImg mx-auto">
+        <img class="mb-2 mr-sm-4 mr-3" src="{{ eachIntro.img1 }}" />
+        <img class="mb-2 mr-sm-4 mr-3" src="{{ eachIntro.img2 }}" />
+        <img class="mb-2 mr-sm-4 mr-3" src="{{ eachIntro.img3 }}" />
+        <img class="mb-2 mr-sm-4 mr-3" src="{{ eachIntro.img4 }}" />
+      </div>
+      <div class="col-xl-6 col-lg-5 col-md-10 col-sm-9 col-9 mx-auto">
+        <div class="embed-responsive embed-responsive-1by1">
+          <iframe
+            class="embed-responsive-item"
+            src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+        <h5 class="courseInstructorName">{{ eachIntro.instructor }}</h5>
+        <h2>{{ eachIntro.coursename }}</h2>
+        <div class="row mt-1 ml-1">
+          <ngx-stars
+            [readonly]="false"
+            [size]="2"
+            [color]="'#FDCC0D'"
+            [initialStars]="totalRate"
+            [customStarIcons]="heartIcons"
+            (ratingOutput)="onRatingSet($event)"
+          ></ngx-stars>
+        </div>
+        <div class="courseDetailDescription">
+          <p>{{ eachIntro.courseDescription }}</p>
+        </div>
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3">
+            <p class="strikethroughPriceDiscount">
+              {{ eachIntro.previousSalary }}
+            </p>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3">
+            <p>{{ eachIntro.Salary }}</p>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3">
+            <div class="follow">{{ eachIntro.courseSale }}</div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-3 ml-1 pr-1">
+            <a href="#" class="btn btn-primary bookNow">BOOK NOW</a>
+          </div>
+
+          <div
+            class="heartStle ml-4 ml-sm-0 pl-5"
+            (click)="mainCourseAddFavourite(eachIntro.id)"
+          >
+            <i
+              [ngClass]="
+                fourite.indexOf(eachIntro.id) !== -1
+                  ? 'fas fa-heart full-heart'
+                  : 'far fa-heart empty-heart'
+              "
+            ></i>
+          </div>
+          <div
+            class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3 mx-auto shareStyle"
+          >
+            <i class="fas fa-share-alt"><span class="ml-1">share</span></i>
+          </div>
+        </div>
+        <p class="timeOfMoneyBack">30 Day Money Back Guarantee</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-5">
+      <div class="whatLearn">
+        <h4>What You Learn</h4>
+        <ul *ngFor="let eachLearn of learn">
+          <li>{{ eachLearn }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+      <div class="courseCalender">
+        <h4>This Course Includes</h4>
+        <div>
+          <span>2 Days a Weak</span>
+        </div>
+        <div>
+          <span>25 Materials</span>
+        </div>
+        <div>
+          <span>19 Exercises</span>
+        </div>
+        <div>
+          <span>Certificate of Completion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div
+      class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-5 reviewers mx-auto"
+    >
+      <div class="allReview">
+        <div class="row">
+          <h2 class="ReviewersHeader mr-4">Reviews (1480)</h2>
+          <!-- <p class="ReviewersNumber">(1480)</p> -->
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <i class="price-text-color fa fa-star mr-4"></i>
+          <!-- <img src="../../../assets/home/iconfinder_Star_Gold_12868.png"> -->
+          <div><span>4</span>/5</div>
+          <p>Average Rating</p>
+        </div>
+        <div *ngFor="let reviewer of review">
+          <div class="row">
+            <div class="col-2 reviewerImg">
+              <img src="{{ reviewer.imge }}" />
+            </div>
+
+            <div class="col-9 commentDetails">
+              <div>{{ reviewer.date }}</div>
+
+              <h2>{{ reviewer.name }}</h2>
+              <div class="row mt-1 ml-1">
+                <ngx-stars
+                  [readonly]="false"
+                  [size]="2"
+                  [color]="'#FDCC0D'"
+                  [initialStars]="totalRate"
+                  [customStarIcons]="heartIcons"
+                  (ratingOutput)="onRatingSet($event)"
+                ></ngx-stars>
+              </div>
+              <p>{{ reviewer.reviewBody }}</p>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+      <div class="featureReview">
+        <h3>Featured Review</h3>
+        <div class="row">
+          <div class="col-2">
+            <img src="../../../assets/home/Path9-1.png" />
+          </div>
+          <div class="col-1"></div>
+          <div class="col-9">
+            <div>5 septemper 2018</div>
+
+            <h2>john willim</h2>
+            <div class="row mt-1 ml-1">
+              <ngx-stars
+                [readonly]="false"
+                [size]="2"
+                [color]="'#FDCC0D'"
+                [initialStars]="totalRate"
+                [customStarIcons]="heartIcons"
+                (ratingOutput)="onRatingSet($event)"
+              ></ngx-stars>
+            </div>
+            <p>
+              "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et
+              expedita labore voluptates facilis nisi, quisquam ipsam eaque,
+              animi, fugiat aspernatur vel suscipit quaerat praesentium a quidem
+              impedit dicta numquam ipsum"
+            </p>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="badReview">
+        <h3>Bad Review</h3>
+        <div class="row">
+          <div class="col-2">
+            <img src="../../../assets/home/Path9-1.png" />
+          </div>
+          <div class="col-1"></div>
+          <div class="col-9">
+            <div>5 septemper 2018</div>
+
+            <h2>john willim</h2>
+            <div class="row mt-1 ml-1">
+              <ngx-stars
+                [readonly]="false"
+                [size]="2"
+                [color]="'#FDCC0D'"
+                [initialStars]="totalRate"
+                [customStarIcons]="heartIcons"
+                (ratingOutput)="onRatingSet($event)"
+              ></ngx-stars>
+            </div>
+            <p>
+              "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et
+              expedita labore voluptates facilis nisi, quisquam ipsam eaque,
+              animi, fugiat aspernatur vel suscipit quaerat praesentium a quidem
+              impedit dicta numquam ipsum"
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 instructorInfo">
+    <div class="col-sm-3 col-12 instructorIMGPosition">
+      <div class="instructorIMGPosition">
+        <img
+          class="mt-3 instructorIMG"
+          src="../../../assets/home/Path9-1.png"
+          alt="Instructor Photo"
+        />
+      </div>
+      <br />
+      <div class="instructorRate mb-2">4.5 (1.335)</div>
+      <div class="row mt-1 ml-1">
+        <ngx-stars
+          [readonly]="false"
+          [size]="2"
+          [color]="'#FDCC0D'"
+          [initialStars]="totalRate"
+          [customStarIcons]="heartIcons"
+          (ratingOutput)="onRatingSet($event)"
+        ></ngx-stars>
+      </div>
+
+      <button class="instructorFollow mb-2">follow</button>
+    </div>
+
+    <div class="mt-2 col-sm-9 col-12">
+      <h2>john william said</h2>
+      <p class="instructorJob">UX Designer</p>
+      <p class="instructorbrief">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+        corrupti officia, eius exercitationem dolorem eum necessitatibus eaque,
+        accusamus cum recusandae qui rerum quis nostrum nulla. Illum enim
+        eligendi sequi dolorem nostrum aperiam animi harum, facere consequatur
+        fuga? Laboriosam nemo provident accusamus, omnis, dolore sunt culpa
+        neque laudantium animi earum, modi fugit impedit? Magnam aspernatur qui
+        dignissimos id ducimus aliquid temporibus molestias, possimus nesciunt
+        aliquam ea maxime quaerat officiis facilis. Possimus eos debitis earum?
+        Nulla, consectetur explicabo. Libero tempora quis quibusdam praesentium
+        at sit est maxime eius dolorem sequi id totam, incidunt voluptas.
+        Reiciendis, adipisci! Tempore quo voluptatibus eaque quia laborum.
+        Molestias iste fuga animi enim voluptate nisi aspernatur quibusdam. Ea
+        tempore quos repellendus velit saepe autem modi natus in nihil quidem
+        rem recusandae distinctio
+      </p>
+    </div>
+  </div>
+  <div class="mt-5">
+    <h2 class="mb-4">Related Courses</h2>
+  </div>
+  <div class="row">
+    <div
+      class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
+      *ngFor="let x of y; let i = index"
+    >
+      <div class="card cardWidth mb-3">
+        <div class="circleProgress">
+          <circle-progress
+            [percent]="x.coursRegistration"
+            [radius]="6"
+            [outerStrokeWidth]="1"
+            [innerStrokeWidth]="1"
+            [space]="-1"
+            [outerStrokeColor]="'#ff754e'"
+            [innerStrokeColor]="'#e7e8ea'"
+            [titleColor]="'#fff'"
+            [unitsColor]="'#fff'"
+            [titleFontSize]="4"
+            [unitsFontSize]="4"
+            [showSubtitle]="false"
+            [animation]="true"
+            [animationDuration]="100"
+            [startFromZero]="false"
+            [responsive]="true"
+          ></circle-progress>
+        </div>
+
+        <img src="{{ x.img }}" class="card-img-top" alt="..." />
+        <div class="card-body cardBodyTopRated">
+          <div class="row mb-2 ml-1 ml-sm-0">
+            <h5 class="card-title">{{ x.title }}</h5>
+          </div>
+          <div class="row mb-1 ml-1 ml-sm-0">
+            <p class="card-text">{{ x.description }}</p>
+          </div>
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <ngx-stars
+              [readonly]="false"
+              [size]="2"
+              [color]="'#FDCC0D'"
+              [initialStars]="totalRate"
+              [customStarIcons]="heartIcons"
+              (ratingOutput)="onRatingSet($event)"
+            ></ngx-stars>
+          </div>
+          <br /><br />
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <p class="strikethroughPriceDiscount">
+              {{ x.anotherDiscount }}
+            </p>
+            <p class="Discount mx-3">{{ x.Discount }}</p>
+            <div class="discountBTN">{{ x.buttonText }}</div>
+          </div>
+          <br />
+          <div class="row mt-4">
+            <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+            <div class="heartStle ml-4 ml-sm-0" (click)="addFavourite(x.id, i)">
+              <i
+                [ngClass]="
+                  fourite.indexOf(x.id) !== -1
+                    ? 'fas fa-heart full-heart'
+                    : 'far fa-heart empty-heart'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>

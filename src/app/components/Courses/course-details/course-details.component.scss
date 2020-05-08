@@ -1,0 +1,334 @@
+$mainColor: #ff754e;
+$secondMainColor: #ffffffff;
+$backgroundImge: linear-gradient($mainColor, #ff9374);
+$textAlign: center;
+@mixin widthHeightBradius($w, $h, $r) {
+  width: $w;
+  height: $h;
+  border-radius: $r;
+}
+@mixin borderAndBradius($border, $bradius) {
+  border: $border;
+  border-radius: $bradius;
+}
+.priceDiscount {
+  text-decoration: line-through;
+  display: inline;
+  color: #a5a5a5;
+}
+
+.heartDesign {
+  font-size: 40px;
+  color: $mainColor;
+}
+/*course details*/
+.courseDetails {
+  background-color: #ffffff;
+  padding: 20px;
+  @include borderAndBradius(none, 10px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+  .smImg {
+    img {
+      border-radius: 7px;
+    }
+  }
+  .embed-responsive {
+    border-radius: 20px;
+  }
+  .courseInstructorName {
+    color: #a5a5a5;
+  }
+  .courseDetailDescription {
+    text-align: justify;
+  }
+  .strikethroughPriceDiscount {
+    @extend .priceDiscount;
+  }
+  .timeOfMoneyBack {
+    color: #a5a5a5;
+  }
+  .bookNow {
+    background-image: $backgroundImge;
+    border-color: $mainColor;
+    @include widthHeightBradius(125px, 43px, 7px);
+    margin-top: 10px;
+  }
+  .heartStle {
+    @extend .heartDesign;
+  }
+  .shareStyle {
+    margin-top: 20px;
+  }
+  .fa-share-alt {
+    font-size: 20px;
+  }
+}
+
+/* */
+.whatLearn {
+  background-color: #ffffff;
+  line-height: 25px;
+  padding: 20px;
+  @include borderAndBradius(none, 10px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+}
+
+.courseCalender {
+  background-color: #ffffff;
+  line-height: 40px;
+  padding: 20px;
+  @include borderAndBradius(none, 10px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+}
+/*  */
+.reviewers {
+  background-color: #ffffff;
+  /* line-height: 40px; */
+  padding: 20px;
+  @include borderAndBradius(none, 10px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+
+  img {
+    width: 120px;
+    height: 80px;
+  }
+  .reviewerImg {
+    margin-right: 30px;
+  }
+  .commentDetails {
+    padding-left: 40px;
+  }
+}
+
+.featureReview {
+  background-color: #ffffff;
+  /* line-height: 40px; */
+  padding: 20px;
+  @include borderAndBradius(none, 10px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+  img {
+    width: 100px;
+    height: 80px;
+  }
+}
+.badReview {
+  background-color: #ffffff;
+  /* line-height: 40px; */
+  padding: 20px;
+  @include borderAndBradius(none, 10px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+
+  img {
+    width: 100px;
+    height: 80px;
+  }
+}
+
+/*  */
+.instructorInfo {
+  background-color: #ffffff;
+  @include borderAndBradius(none, 15px);
+  box-shadow: 0px 1px 27px rgba(0, 0, 0, 0.15);
+
+  .instructorIMGPosition {
+    text-align: center;
+    .instructorIMG {
+      @include widthHeightBradius(190px, 200px, 90%);
+    }
+  }
+
+  .instructorRate {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h2 {
+    font-size: 30px;
+    color: #ff754e;
+  }
+  .instructorFollow {
+    background-image: linear-gradient(#ff754e, #ff9374);
+    @include borderAndBradius(none, 7px);
+    height: 40px;
+    width: 110px;
+  }
+
+  .instructorJob {
+    color: #a2a2a2;
+    font-size: 20px;
+  }
+  .instructorbrief {
+    font-size: 18px;
+  }
+}
+
+/*  */
+/* card desgin */
+
+.course {
+  margin-right: 10px;
+  background-color: #d8d8d8;
+}
+.card {
+  border-radius: 20px;
+
+  .card-img-top {
+    height: 15rem;
+  }
+
+  .cardBodyTopRated {
+    line-height: 10px;
+
+    .card-text {
+      width: 14.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 20px;
+    }
+
+    .strikethroughPriceDiscount {
+      text-decoration: line-through;
+      color: #acacac;
+      display: inline;
+    }
+
+    .Discount {
+      display: inline;
+    }
+
+    .discountBTN {
+      background-color: transparent;
+      text-align: center;
+      color: $mainColor;
+      font-size: 20px;
+    }
+
+    .bookNow {
+      position: absolute;
+      background-image: $backgroundImge;
+      border-color: $mainColor;
+      width: 160px;
+      height: 45px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 20px;
+      left: 0;
+      bottom: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .heartStle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-right: 30px;
+
+      .empty-heart {
+        font-size: 40px;
+        color: $mainColor;
+      }
+    }
+
+    .full-heart {
+      @extend .heartDesign;
+    }
+  }
+}
+
+.circleProgress {
+  position: relative;
+}
+
+circle-progress {
+  position: absolute;
+  left: 240px;
+  top: -15px;
+}
+
+.category {
+  background-image: $backgroundImge;
+  border-radius: 9px;
+  position: absolute;
+  margin-left: 15px;
+  width: 90px;
+  height: 30px;
+  text-align: $textAlign;
+  color: $secondMainColor;
+  padding: 5px;
+  top: 250px;
+}
+
+.location {
+  position: absolute;
+  background-image: linear-gradient(#4a43db, #716af6);
+  border-radius: 9px;
+  color: $secondMainColor;
+  width: 90px;
+  height: 30px;
+  padding: 7px;
+  top: 250px;
+}
+
+.location .locationPlace {
+  display: inline;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .card-img-top {
+    height: 5rem;
+  }
+
+  .card-text {
+    width: 30rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+  }
+
+  .heartStle {
+    margin-right: 10px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .cardWidth {
+    width: 16.5rem;
+
+    circle-progress {
+      position: absolute;
+      left: 150px;
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .cardWidth {
+    width: 14.5rem;
+
+    .heartStle {
+      margin-right: 10px;
+    }
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .cardWidth {
+    width: 19rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .cardWidth {
+    width: 17rem;
+  }
+}

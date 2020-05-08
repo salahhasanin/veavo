@@ -1,0 +1,317 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- carousel section -->
+    <carousel [showIndicators]="showIndicators">
+      <slide style="vertical-align: middle;">
+        <img
+          class="carouselImg"
+          src="../../../assets/login/slider6.png"
+          alt="first slide"
+          style="display: block; width: 100%;"
+        />
+        <div class="carousel-caption slogan d-none d-md-block">
+          <div class="startSlogann">Start Learnin For</div>
+          <h2>
+            SUCCESS FUTURE
+          </h2>
+          <div class="finishSlogann">The Best Solution</div>
+        </div>
+      </slide>
+      <slide>
+        <img
+          class="carouselImg"
+          src="../../../assets/login/slider4.png"
+          alt="second slide"
+          style="display: block; width: 100%;"
+        />
+        <div class="carousel-caption slogan d-none d-md-block">
+          <div class="startSlogann">Start Learnin For</div>
+          <h2>
+            SUCCESS FUTURE
+          </h2>
+          <div class="finishSlogann">The Best Solution</div>
+        </div>
+      </slide>
+      <slide>
+        <img
+          class="carouselImg"
+          src="../../../assets/login/slider5.png"
+          alt="third slide"
+          style="display: block; width: 100%;"
+        />
+        <div class="carousel-caption slogan d-none d-md-block">
+          <div class="startSlogann">Start Learnin For</div>
+          <h2>
+            SUCCESS FUTURE
+          </h2>
+          <div class="finishSlogann">The Best Solution</div>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>
+<br />
+<div class="container">
+  <!-- search -->
+  <div class="row">
+    <div class="searchform col-lg-9 col-md-11 col-sm-12 col-11 mx-auto">
+      <form
+        class="form-inline searchFormStyle justify-content-center align-self-center"
+        [formGroup]="searchformm"
+      >
+        <div class="form-group mx-lg-3 mx-md-1 mb-sm-2">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="coursecategory"
+            placeholder="What Do You Want To Learn?"
+          />
+        </div>
+        <div class="form-group mx-lg-1 mx-md-1 mb-sm-2">
+          <input
+            type="password"
+            class="form-control mr-md-5"
+            formControlName="location"
+            placeholder="Your Location"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mx-sm-auto">
+          Search
+        </button>
+        <!-- </div> -->
+      </form>
+    </div>
+  </div>
+  <!-- top rated section -->
+  <div>
+    <h2 class="mt-1 mb-3">TOP RATED</h2>
+  </div>
+
+  <owl-carousel
+    id="owl"
+    [options]="{
+      items: 4,
+      loop: true,
+      mouseDrag: true,
+      touchDrag: true,
+      pullDrag: true,
+      margin: 10,
+      dots: true,
+      navSpeed: 200,
+      responsive: {
+        '0': { items: 1 },
+        '576': { items: 2 },
+        '600': { items: 2 },
+        '768': { items: 2 },
+        '992': { items: 3 },
+        '1200': { items: 4 }
+      }
+    }"
+    [items]="images"
+    [carouselClasses]="['owl-theme', mx - auto, 'row', 'sliding']"
+  >
+    <div class="mx-auto" *ngFor="let x of y; let i = index">
+      <div class="card cardWidth mb-3">
+        <div class="circleProgress">
+          <circle-progress
+            [percent]="x.coursRegistration"
+            [radius]="6"
+            [outerStrokeWidth]="1"
+            [innerStrokeWidth]="1"
+            [space]="-1"
+            [outerStrokeColor]="'#ff754e'"
+            [innerStrokeColor]="'#e7e8ea'"
+            [titleColor]="'#fff'"
+            [unitsColor]="'#fff'"
+            [titleFontSize]="4"
+            [unitsFontSize]="4"
+            [showSubtitle]="false"
+            [animation]="true"
+            [animationDuration]="100"
+            [startFromZero]="false"
+            [responsive]="true"
+          ></circle-progress>
+        </div>
+
+        <img src="{{ x.img }}" class="card-img-top" alt="..." />
+        <div class="card-body cardBodyTopRated">
+          <div class="row mb-2 ml-1 ml-sm-0">
+            <h5 class="card-title">{{ x.title }}</h5>
+          </div>
+          <div class="row mb-1 ml-1 ml-sm-0">
+            <p class="card-text course-text">{{ x.description }}</p>
+          </div>
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <ngx-stars
+              [readonly]="false"
+              [size]="2"
+              [color]="'#FDCC0D'"
+              [initialStars]="totalRate"
+              [customStarIcons]="heartIcons"
+              (ratingOutput)="onRatingSet($event)"
+            ></ngx-stars>
+          </div>
+          <br /><br />
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <p class="strikethroughPriceDiscount">
+              {{ x.anotherDiscount }}
+            </p>
+            <p class="Discount mx-3">{{ x.Discount }}</p>
+            <div class="discountBTN">{{ x.buttonText }}</div>
+          </div>
+          <br />
+          <div class="row mt-4">
+            <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+            <div class="heartStle ml-4 ml-sm-0" (click)="addFavourite(x.id, i)">
+              <i
+                [ngClass]="
+                  fourite.indexOf(x.id) !== -1
+                    ? 'fas fa-heart full-heart'
+                    : 'far fa-heart empty-heart'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </owl-carousel>
+
+  <div>
+    <h2 class="mt-1 mb-3">New Courses</h2>
+  </div>
+
+  <owl-carousel
+    id="owl"
+    [options]="{
+      items: 4,
+      loop: true,
+      mouseDrag: true,
+      touchDrag: true,
+      pullDrag: true,
+      margin: 10,
+      dots: true,
+      navSpeed: 200,
+      responsive: {
+        '0': { items: 1 },
+        '576': { items: 2 },
+        '600': { items: 2 },
+        '768': { items: 2 },
+        '992': { items: 3 },
+        '1200': { items: 4 }
+      }
+    }"
+    [items]="images"
+    [carouselClasses]="['owl-theme', mx - auto, 'row', 'sliding']"
+  >
+    <div class="mx-auto" *ngFor="let x of y; let i = index">
+      <div class="card cardWidth mb-3">
+        <div class="circleProgress">
+          <circle-progress
+            [percent]="x.coursRegistration"
+            [radius]="6"
+            [outerStrokeWidth]="1"
+            [innerStrokeWidth]="1"
+            [space]="-1"
+            [outerStrokeColor]="'#ff754e'"
+            [innerStrokeColor]="'#e7e8ea'"
+            [titleColor]="'#fff'"
+            [unitsColor]="'#fff'"
+            [titleFontSize]="4"
+            [unitsFontSize]="4"
+            [showSubtitle]="false"
+            [animation]="true"
+            [animationDuration]="100"
+            [startFromZero]="false"
+            [responsive]="true"
+          ></circle-progress>
+        </div>
+
+        <img src="{{ x.img }}" class="card-img-top" alt="..." />
+        <div class="card-body cardBodyTopRated">
+          <div class="row mb-2 ml-1 ml-sm-0">
+            <h5 class="card-title">{{ x.title }}</h5>
+          </div>
+          <div class="row mb-1 ml-1 ml-sm-0">
+            <p class="card-text course-text">{{ x.description }}</p>
+          </div>
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <ngx-stars
+              [readonly]="false"
+              [size]="2"
+              [color]="'#FDCC0D'"
+              [initialStars]="totalRate"
+              [customStarIcons]="heartIcons"
+              (ratingOutput)="onRatingSet($event)"
+            ></ngx-stars>
+          </div>
+          <br /><br />
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <p class="strikethroughPriceDiscount">
+              {{ x.anotherDiscount }}
+            </p>
+            <p class="Discount mx-3">{{ x.Discount }}</p>
+            <div class="discountBTN">{{ x.buttonText }}</div>
+          </div>
+          <br />
+          <div class="row mt-4">
+            <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+            <div class="heartStle ml-4 ml-sm-0" (click)="addFavourite(x.id, i)">
+              <i
+                [ngClass]="
+                  fourite.indexOf(x.id) !== -1
+                    ? 'fas fa-heart full-heart'
+                    : 'far fa-heart empty-heart'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </owl-carousel>
+
+  <div>
+    <h2 class="my-5">INSTRUCTORS</h2>
+  </div>
+  <div class="row my-5">
+    <div
+      class="col-lg-3 col-md-6 col-xs-6 col-6"
+      *ngFor="let eachInstructor of instrucrors"
+    >
+      <div class="card instructorCard mb-5 mr-2" style="width: 14rem;">
+        <div class="cardHeader" style="height: 10rem;">
+          <div class="card-info text-center">
+            <!-- rounded-circle -->
+            <img
+              src="{{ eachInstructor.img }}"
+              class="card-img-top rounded-circle instrucrorImg mt-2"
+              alt="..."
+              style="height: 8rem;"
+            />
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center instrucrorName">
+            {{ eachInstructor.title }}
+          </h5>
+          <p class="card-text text-center instrucrorJob">
+            {{ eachInstructor.description }}
+          </p>
+
+          <div style="text-align: center;">
+            <button class="FollowInstructor">Follow</button>
+          </div>
+          <br />
+          <div class="socialInstructor">
+            <i class="fab fa-facebook mr-2"></i>
+            <i class="fab fa-linkedin mr-2"></i>
+            <i class="fab fa-twitter-square"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

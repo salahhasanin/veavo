@@ -1,0 +1,159 @@
+<div class="container-fluid">
+  <div class="container">
+    <br />
+    <br />
+    <div class="row instructorInfo">
+      <div
+        class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 instructorIMGPosition"
+      >
+        <div class="">
+          <img
+            class="mt-3 instructorIMG"
+            src="../../../assets/home/Path9-1.png"
+            alt="Instructor Photo"
+          />
+        </div>
+        <br />
+        <div class="instructorRate mb-2">4.5 (1.335)</div>
+
+        <div class="instructorSocialContact">
+          <i class="socil mr-4 fab fa-facebook-f"></i>
+          <i class="socil mr-4 fab fa-google-plus-g"></i>
+          <i class="socil fab fa-twitter"></i>
+        </div>
+        <div class="">
+          <ngx-stars
+            [readonly]="false"
+            [size]="2"
+            [color]="'#FDCC0D'"
+            [initialStars]="totalRate"
+            [customStarIcons]="heartIcons"
+            (ratingOutput)="onRatingSet($event)"
+            class="instructorIMGPosition mx-auto"
+          ></ngx-stars>
+        </div>
+        <button class="instructorFollow mt-1 mb-2">follow</button>
+      </div>
+
+      <div
+        class="mt-2 col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12 instructorDefining"
+      >
+        <h2>john william said</h2>
+        <p class="instructorJob">UX Designer</p>
+        <p class="instructorbrief">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+          corrupti officia, eius exercitationem dolorem eum necessitatibus
+          eaque, accusamus cum recusandae qui rerum quis nostrum nulla. Illum
+          enim eligendi sequi dolorem nostrum aperiam animi harum, facere
+          consequatur fuga? Laboriosam nemo provident accusamus, omnis, dolore
+          sunt culpa neque laudantium animi earum, modi fugit impedit? Magnam
+          aspernatur qui dignissimos id ducimus aliquid temporibus molestias,
+          repellendus velit saepe autem modi natus in nihil quidem rem
+          recusandae distinctio
+        </p>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="row my-5 instructorStatistics">
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 mx-auto">
+        <h6 class="instructorStatisticsInfo">followers</h6>
+        <p class="instructorStatisticsResult">25</p>
+      </div>
+
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 mx-auto">
+        <h6 class="instructorStatisticsInfo">Total Student</h6>
+        <p class="instructorStatisticsResult">1,255</p>
+      </div>
+
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 mx-auto">
+        <h6 class="instructorStatisticsInfo">COURSES</h6>
+        <p class="instructorStatisticsResult">25</p>
+      </div>
+
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 mx-auto">
+        <h6 class="instructorStatisticsInfo">REVIWERS</h6>
+        <p class="instructorStatisticsResult">202,52</p>
+      </div>
+    </div>
+
+    <h2 class="mb-4 d-none d-lg-block d-xl-block">
+      Courses By The Instructor Name
+    </h2>
+
+    <div class="row">
+      <div
+        class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
+        *ngFor="let x of y; let i = index"
+      >
+        <div class="card cardWidth mb-3">
+          <div class="circleProgress">
+            <circle-progress
+              [percent]="x.coursRegistration"
+              [radius]="6"
+              [outerStrokeWidth]="1"
+              [innerStrokeWidth]="1"
+              [space]="-1"
+              [outerStrokeColor]="'#ff754e'"
+              [innerStrokeColor]="'#e7e8ea'"
+              [titleColor]="'#fff'"
+              [unitsColor]="'#fff'"
+              [titleFontSize]="4"
+              [unitsFontSize]="4"
+              [showSubtitle]="false"
+              [animation]="true"
+              [animationDuration]="100"
+              [startFromZero]="false"
+              [responsive]="true"
+            ></circle-progress>
+          </div>
+
+          <img src="{{ x.img }}" class="card-img-top" alt="..." />
+          <div class="card-body cardBodyTopRated">
+            <div class="row mb-2 ml-1 ml-sm-0">
+              <h5 class="card-title">{{ x.title }}</h5>
+            </div>
+            <div class="row mb-1 ml-1 ml-sm-0">
+              <p class="card-text">{{ x.description }}</p>
+            </div>
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <ngx-stars
+                [readonly]="false"
+                [size]="2"
+                [color]="'#FDCC0D'"
+                [initialStars]="totalRate"
+                [customStarIcons]="heartIcons"
+                (ratingOutput)="onRatingSet($event)"
+              ></ngx-stars>
+            </div>
+            <br /><br />
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <p class="strikethroughPriceDiscount">
+                {{ x.anotherDiscount }}
+              </p>
+              <p class="Discount mx-3">{{ x.Discount }}</p>
+              <div class="discountBTN">{{ x.buttonText }}</div>
+            </div>
+            <br />
+            <div class="row mt-4">
+              <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+              <div
+                class="heartStle ml-4 ml-sm-0"
+                (click)="addFavourite(x.id, i)"
+              >
+                <i
+                  [ngClass]="
+                    fourite.indexOf(x.id) !== -1
+                      ? 'fas fa-heart full-heart'
+                      : 'far fa-heart empty-heart'
+                  "
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

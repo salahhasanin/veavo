@@ -1,0 +1,139 @@
+<div class="container zb">
+  <br />
+  <br />
+  <h2 class="mb-4 favouritHeader">FAVOURITE</h2>
+  <div class="row">
+    <div
+      class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
+      *ngFor="let x of y; let i = index"
+    >
+      <div class="card cardWidth mb-3">
+        <div class="circleProgress">
+          <circle-progress
+            [percent]="x.coursRegistration"
+            [radius]="6"
+            [outerStrokeWidth]="1"
+            [innerStrokeWidth]="1"
+            [space]="-1"
+            [outerStrokeColor]="'#ff754e'"
+            [innerStrokeColor]="'#e7e8ea'"
+            [titleColor]="'#fff'"
+            [unitsColor]="'#fff'"
+            [titleFontSize]="4"
+            [unitsFontSize]="4"
+            [showSubtitle]="false"
+            [animation]="true"
+            [animationDuration]="100"
+            [startFromZero]="false"
+            [responsive]="true"
+          ></circle-progress>
+        </div>
+
+        <img src="{{ x.img }}" class="card-img-top" alt="..." />
+        <div class="card-body cardBodyTopRated">
+          <div class="row mb-2 ml-1 ml-sm-0">
+            <h5 class="card-title">{{ x.title }}</h5>
+          </div>
+          <div class="row mb-1 ml-1 ml-sm-0">
+            <p class="card-text">{{ x.description }}</p>
+          </div>
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <ngx-stars
+              [readonly]="false"
+              [size]="2"
+              [color]="'#FDCC0D'"
+              [initialStars]="totalRate"
+              [customStarIcons]="heartIcons"
+              (ratingOutput)="onRatingSet($event)"
+            ></ngx-stars>
+          </div>
+          <br /><br />
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <p class="strikethroughPriceDiscount">
+              {{ x.anotherDiscount }}
+            </p>
+            <p class="Discount mx-3">{{ x.Discount }}</p>
+            <div class="discountBTN">{{ x.buttonText }}</div>
+          </div>
+          <br />
+          <div class="row mt-4">
+            <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+            <div class="heartStle ml-4 ml-sm-0" (click)="addFavourite(x.id, i)">
+              <i
+                [ngClass]="
+                  fourite.indexOf(x.id) !== -1
+                    ? 'fas fa-heart full-heart'
+                    : 'far fa-heart empty-heart'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="card cardTopRated mb-5 mr-2 mx-auto">
+            <div class="cardHeader">
+              <div class="card-info">
+                <circle-progress
+                  [percent]="x.coursRegistration"
+                  [radius]="30"
+                  [outerStrokeWidth]="5"
+                  [innerStrokeWidth]="6"
+                  [outerStrokeColor]="'#000000'"
+                  [innerStrokeColor]="'#cccccc'"
+                  [showSubtitle]="false"
+                  [unitsFontWeight]="900"
+                  [animation]="true"
+                  [animationDuration]="300"
+                  [titleFontSize]="18"
+                  [units]="point"
+                  [showUnits]="true"
+                >
+                </circle-progress>
+                
+                <img
+                  src="{{ x.img }}"
+                  class="card-img-top"
+                  alt="..."
+                  style="height: 15rem;"
+                />
+              </div>
+            </div>
+            <div class="card-body cardBodyTopRated">
+              <div class="row mb-2">
+                <h5 class="card-title">{{ x.title }}</h5>
+              </div>
+              <div class="row mb-1">
+                <p class="card-text">{{ x.description }}</p>
+              </div>
+              <div class="row mt-1">
+                <ngx-stars
+                  [readonly]="false"
+                  [size]="2"
+                  [color]="'#FDCC0D'"
+                  [initialStars]="totalRate"
+                  [customStarIcons]="heartIcons"
+                  (ratingOutput)="onRatingSet($event)"
+                ></ngx-stars>
+                <div style="font-size: 20px;">({{ totalRate }})</div>
+              </div><br /><br />
+              <div class="row mt-1">
+                <p class="strikethroughPriceDiscount">
+                  {{ x.anotherDiscount }}
+                </p>
+                <p class="Discount mx-3">{{ x.Discount }}</p>
+                <div class="discountBTN">{{ x.buttonText }}</div>
+              </div><br />
+              <div class="row mt-4">
+                <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+                <div class="heartStle">
+                  <i class="far fa-heart"></i>
+                </div>
+              </div>
+            </div>
+          </div> -->

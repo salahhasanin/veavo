@@ -1,0 +1,54 @@
+.container-fluid {
+    background-color: #D8D8D8;
+}
+
+.Profile {
+    color: #FF754E;
+    text-align: center;
+}
+
+.row {
+    text-align: center;
+
+}
+
+.profileinfo {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    line-height: 30px;
+    width: 600px;
+    text-align: center;
+}
+
+.imgname {
+    text-align: center;
+
+    .profileImg {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: none;
+    }
+}
+
+
+.define {
+    float: right;
+}
+
+.illestrate {
+    float: left;
+}
+
+.head {
+    text-align: center;
+}
+
+button {
+    padding: 5px;
+    background-color: #FF754E;
+    border: none;
+    border-radius: 7px;
+}

@@ -1,0 +1,523 @@
+// .container-fluid {
+//     background-color: #D8D8D8;
+// }
+
+// .strikethroughPriceDiscount {
+//     text-decoration: line-through;
+// }
+
+// .favouritHeader {
+//     font-size: 30px;
+//     color: #FF754E;
+// }
+
+// /* card desgin */
+// // .course {
+// //     margin-right: 10px;
+// //     background-color: #D8D8D8;
+// // }
+
+// // .card {
+// //     border-radius: 20px;
+// // }
+
+// // .card img {
+// //     height: 280px;
+// // }
+
+// // .photoInfo {
+// //     position: relative;
+// // }
+
+// // .cardHeader {
+// //     position: relative;
+// // }
+
+// // .card-info-button {
+// //     position: relative;
+// //     bottom: 20px
+// // }
+
+// // .category {
+// //     background-image: linear-gradient(#FF754E, #FF9374);
+// //     border-radius: 9px;
+// //     position: absolute;
+// //     margin-left: 15px;
+// //     width: 90px;
+// //     height: 30px;
+// //     text-align: center;
+// //     color: white;
+// //     padding: 5px;
+// //     top: 250px;
+
+// // }
+
+// // .strikethroughPriceDiscount {
+// //     text-decoration: line-through;
+// //     display: inline;
+
+// // }
+
+// // .Discount {
+// //     display: inline;
+// // }
+
+// // circle-progress {
+// //     position: absolute;
+// //     left: 170px;
+// //     ;
+// // }
+
+// // .location {
+// //     position: absolute;
+// //     background-image: linear-gradient(#4A43DB, #716AF6);
+// //     border-radius: 9px;
+// //     color: white;
+// //     width: 90px;
+// //     height: 30px;
+// //     padding: 7px;
+// //     top: 250px;
+// // }
+
+// // .location .locationPlace {
+// //     display: inline;
+// // }
+
+// // .fa-heart {
+// //     font-size: 30px
+// // }
+
+// // .bookNow {
+// //     position: absolute;
+// //     background-image: linear-gradient(#FF754E, #FF9374);
+// //     border-color: #FF754E;
+// //     left: 0;
+// //     width: 130px;
+// // }
+
+// // .fa-heart {
+// //     color: #FF754E;
+// // }
+
+// // /*  */
+// // @media (min-width: 576px) {
+// //     .tttt {
+// //         margin-right: 5px;
+// //         text-align: center;
+// //     }
+// // }
+// $mainColor: #ff754e;
+// $secondMainColor: #ffffffff;
+// $backgroundImge: linear-gradient($mainColor, #ff9374);
+// $textAlign: center;
+
+// // large screen design 
+// .card {
+//     border-radius: 20px;
+// }
+
+// .card img {
+//     height: 280px;
+// }
+
+// .card-text {
+//     width: 14.5rem;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     // margin-bottom: 10px;
+//     height: 20px;
+// }
+
+// .photoInfo {
+//     position: relative;
+// }
+
+// .cardHeader {
+//     position: relative;
+// }
+
+// .card-info-button {
+//     position: relative;
+//     bottom: 20px;
+// }
+
+// .category {
+//     background-image: $backgroundImge;
+//     border-radius: 9px;
+//     position: absolute;
+//     margin-left: 15px;
+//     width: 90px;
+//     height: 30px;
+//     text-align: $textAlign;
+//     color: $secondMainColor;
+//     padding: 5px;
+//     top: 250px;
+// }
+
+// .strikethroughPriceDiscount {
+//     text-decoration: line-through;
+//     color: #ACACAC;
+//     display: inline;
+// }
+
+// .Discount {
+//     display: inline;
+// }
+
+// circle-progress {
+//     position: absolute;
+//     left: 170px;
+// }
+
+// .location {
+//     position: absolute;
+//     background-image: linear-gradient(#4a43db, #716af6);
+//     border-radius: 9px;
+//     color: $secondMainColor;
+//     width: 90px;
+//     height: 30px;
+//     padding: 7px;
+//     top: 250px;
+// }
+
+// .location .locationPlace {
+//     display: inline;
+// }
+
+// .cardTopRated {
+//     width: 16rem;
+
+//     .cardBodyTopRated {
+//         line-height: 10px;
+//     }
+
+//     .discountBTN {
+//         // position: absolute;
+//         background-color: transparent;
+//         // border: .5px solid black;
+//         width: 90px;
+//         // height: 30px;
+//         // padding-top: 7px;
+//         // padding-bottom: 7px;
+//         text-align: center;
+//         color: $mainColor;
+//         font-size: 20px;
+
+
+//     }
+
+//     // .bookStyle {
+//     //     position: absolute;
+//     //     bottom: 0;
+
+//     .bookNow {
+//         position: absolute;
+//         background-image: $backgroundImge;
+//         border-color: $mainColor;
+//         width: 160px;
+//         height: 45px;
+//         border-top-left-radius: 0px;
+//         border-top-right-radius: 7px;
+//         border-bottom-right-radius: 0px;
+//         border-bottom-left-radius: 20px;
+//         left: 0;
+//         bottom: 0;
+//         padding-top: 10px;
+//         padding-bottom: 10px;
+//         // }
+
+//     }
+
+//     .heartStle {
+//         position: absolute;
+//         bottom: 0;
+//         right: 0;
+//         margin-right: 30px;
+
+//         .fa-heart {
+//             // position: absolute;
+//             // bottom: 0;
+//             font-size: 40px;
+//             color: $mainColor;
+
+//         }
+
+//     }
+// }
+
+// //small screens 
+// .booNowBtn {
+//     .bookNowSmallScreen {
+//         position: absolute;
+//         background-image: $backgroundImge;
+//         width: 160px;
+//         height: 45px;
+//         display: table-cell;
+//         vertical-align: middle;
+//         border-color: $mainColor;
+//         border-top-left-radius: 7px;
+//         border-top-right-radius: 0px;
+//         border-bottom-right-radius: 0px;
+//         border-bottom-left-radius: 0px;
+//         bottom: 0;
+//         right: 0;
+//     }
+// }
+
+// /* Extra small devices (phones, 600px and down) */
+// @media only screen and (max-width: 600px) {
+//     .cardTopRated {
+//         // width: 14rem;
+//         width: 100%;
+
+//     }
+
+//     .card-info {
+//         position: relative;
+//         // height: 5rem;
+
+//         .card-img-top {
+//             height: 5rem;
+
+//         }
+
+//         circle-progress {
+//             position: absolute;
+//             left: 130px;
+//         }
+//     }
+
+// }
+
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {
+//     .cardTopRated {
+//         // width: 14.5rem;
+//         width: 100%;
+
+//     }
+
+//     circle-progress {
+//         position: absolute;
+//         left: 150px;
+//     }
+// }
+
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {
+//     .cardTopRated {
+//         // width: 16rem;
+//         width: 100%;
+
+//     }
+// }
+
+// /* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {
+//     .cardTopRated {
+//         width: 16rem;
+
+//     }
+// }
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {
+//     .cardTopRated {
+//         width: 16rem;
+//     }
+// }
+// 
+/////////////////////////////////////////////////////////////////////////////// 
+// 
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+$mainColor: #ff754e;
+$secondMainColor: #ffffffff;
+$backgroundImge: linear-gradient($mainColor, #ff9374);
+$textAlign: center;
+
+.favouritHeader {
+    font-size: 30px;
+    color: #FF754E;
+}
+
+.card {
+    border-radius: 20px;
+
+    .card-img-top {
+        height: 15rem
+    }
+
+    .cardBodyTopRated {
+        line-height: 10px;
+
+        .card-text {
+            width: 14.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 20px;
+        }
+
+        .strikethroughPriceDiscount {
+            text-decoration: line-through;
+            color: #ACACAC;
+            display: inline;
+        }
+
+        .Discount {
+            display: inline;
+        }
+
+        .discountBTN {
+            background-color: transparent;
+            text-align: center;
+            color: $mainColor;
+            font-size: 20px;
+        }
+
+        .bookNow {
+            position: absolute;
+            background-image: $backgroundImge;
+            border-color: $mainColor;
+            width: 160px;
+            height: 45px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 7px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 20px;
+            left: 0;
+            bottom: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .heartStle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-right: 30px;
+
+            .empty-heart {
+                font-size: 40px;
+                color: $mainColor;
+            }
+
+        }
+
+        .full-heart {
+            font-size: 40px;
+            color: $mainColor;
+
+        }
+    }
+}
+
+.circleProgress {
+    position: relative;
+}
+
+circle-progress {
+    position: absolute;
+    left: 240px;
+    top: -15px;
+}
+
+
+
+
+.category {
+    background-image: $backgroundImge;
+    border-radius: 9px;
+    position: absolute;
+    margin-left: 15px;
+    width: 90px;
+    height: 30px;
+    text-align: $textAlign;
+    color: $secondMainColor;
+    padding: 5px;
+    top: 250px;
+}
+
+.location {
+    position: absolute;
+    background-image: linear-gradient(#4a43db, #716af6);
+    border-radius: 9px;
+    color: $secondMainColor;
+    width: 90px;
+    height: 30px;
+    padding: 7px;
+    top: 250px;
+}
+
+.location .locationPlace {
+    display: inline;
+}
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .card-img-top {
+        height: 5rem
+    }
+
+    .card-text {
+        width: 30rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 20px;
+    }
+
+
+
+    .heartStle {
+        margin-right: 10px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .cardWidth {
+        width: 16.5rem;
+
+        circle-progress {
+            position: absolute;
+            left: 150px;
+        }
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .cardWidth {
+        width: 14.5rem;
+
+        .heartStle {
+            margin-right: 10px;
+        }
+    }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .cardWidth {
+        width: 19rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .cardWidth {
+        width: 17rem;
+    }
+}

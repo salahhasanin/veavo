@@ -1,0 +1,412 @@
+<div class="container">
+  <h1 class="Profile mt-5">Profile</h1>
+  <div class="profileinfo">
+    <div class="row">
+      <div class="offset-2 col-10">
+        <form
+          [formGroup]="profileform"
+          (ngSubmit)="profileformSubmit()"
+          class="justify-content-center"
+        >
+          <div
+            class="progress form-group mb-4 mt-3"
+            *ngIf="userService.percentDone"
+          >
+            <div
+              class="progress-bar progress-bar-striped bg-success"
+              role="progressbar"
+              [style.width.%]="userService.percentDone"
+            ></div>
+          </div>
+          <div class="form-row mb-4">
+            <div class="form-group offset-md-3 col-md-4">
+              <!-- <input type="file" class="chooseIMG" id="hide" /> -->
+              <div class="avatar-upload">
+                <div class="avatar-edit">
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept=".png, .jpg, .jpeg"
+                    (change)="uploadFile($event)"
+                  />
+                  <label for="imageUpload"
+                    ><i class="fas fa-pencil-alt"></i
+                  ></label>
+                </div>
+                <div class="avatar-preview">
+                  <div id="imagePreview"></div>
+                  <!-- <div class="preview" *ngIf="preview && preview !== null">
+                    <img src="preview" id="imagePreview" />
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Personal Details</h4>
+
+          <div class="form-row">
+            <div class="form-group col-md-9">
+              <label for="firstname4">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="fullname"
+                [ngClass]="{
+                  error: submitted && profileform.controls.fullname.errors
+                }"
+                id="fullname"
+                placeholder="fullname"
+              />
+              <div
+                *ngIf="
+                  submitted ||
+                  (profileform.get('fullname').invalid &&
+                    (profileform.get('fullname').dirty ||
+                      profileform.get('fullname').touched))
+                "
+                class="validall"
+              >
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.fullname.errors?.required"
+                >
+                  <sup>*</sup>Please enter your Full Name
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.fullname.errors?.pattern"
+                >
+                  <sup>*</sup>Full Name accept letter only
+                </div>
+
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.fullname.errors?.minLength"
+                >
+                  <sup>*</sup> Minimum length is 2
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.fullname.errors?.maxLength"
+                >
+                  <sup>*</sup> Maximum length is 60
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row mb-4">
+            <div class="form-group col-md-4">
+              <h4>Birthday</h4>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="birthday"
+                [ngClass]="{
+                  error: submitted && profileform.controls.birthday.errors
+                }"
+                id="birthday"
+                placeholder="Salary Of The Course"
+              />
+              <div
+                *ngIf="
+                  submitted ||
+                  (profileform.get('birthday').invalid &&
+                    (profileform.get('birthday').dirty ||
+                      profileform.get('birthday').touched))
+                "
+                class="validall"
+              >
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.birthday.errors?.required"
+                >
+                  <sup>*</sup>Please enter your Birthday
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.birthday.errors?.pattern"
+                >
+                  <sup>*</sup>Birthday accept dd/mm/yyyy pattern
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group col-md-1"></div> -->
+
+            <div class="form-group offset-md-1 col-md-4">
+              <h4>Gender</h4>
+
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="usergender"
+                  id="inlineRadio1"
+                  formControlName="usergender"
+                  value="male"
+                />
+                <label class="form-check-label" for="inlineRadio1">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="usergender"
+                  id="inlineRadio2"
+                  formControlName="usergender"
+                  value="male"
+                />
+                <label class="form-check-label" for="inlineRadio2"
+                  >Female</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="usergender"
+                  id="inlineRadio3"
+                  formControlName="usergender"
+                  value="other"
+                />
+                <label class="form-check-label" for="inlineRadio3">Other</label>
+              </div>
+
+              <div
+                *ngIf="
+                  submitted ||
+                  (profileform.get('usergender').invalid &&
+                    (profileform.get('usergender').dirty ||
+                      profileform.get('usergender').touched))
+                "
+                class="validall"
+              >
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.usergender.errors?.required"
+                >
+                  <sup>*</sup>Please enter your Gender
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="form-row mb-4 col-md-4">
+            <div class="form-group col-md-3">
+              <label for="inputState">Month</label>
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="inputState">Day</label>
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="inputState">Year</label>
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+          </div> -->
+          <!-- <h4>Gender</h4>
+          <div class="form-row mb-4 ml-1">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio1"
+                value="option1"
+              />
+              <label class="form-check-label" for="inlineRadio1">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio2"
+                value="option2"
+              />
+              <label class="form-check-label" for="inlineRadio2">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio3"
+                value="option3"
+              />
+              <label class="form-check-label" for="inlineRadio3">Other</label>
+            </div>
+          </div> -->
+          <h4>Address</h4>
+          <div class="form-row mb-3">
+            <div class="form-group col-md-4">
+              <label for="inputCity">City</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="city"
+                [ngClass]="{
+                  error: submitted && profileform.controls.city.errors
+                }"
+                id="city"
+              />
+              <div
+                *ngIf="
+                  submitted ||
+                  (profileform.get('city').invalid &&
+                    (profileform.get('city').dirty ||
+                      profileform.get('city').touched))
+                "
+                class="validall"
+              >
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.city.errors?.required"
+                >
+                  <sup>*</sup>Please enter your city
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.city.errors?.pattern"
+                >
+                  <sup>*</sup>city accept letter only
+                </div>
+
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.city.errors?.minLength"
+                >
+                  <sup>*</sup> Minimum length is 2
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.city.errors?.maxLength"
+                >
+                  <sup>*</sup> Maximum length is 50
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group col-md-1"></div> -->
+
+            <div class="form-group offset-md-1 col-md-4">
+              <label for="inputState">State</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="state"
+                [ngClass]="{
+                  error: submitted && profileform.controls.state.errors
+                }"
+                id="state"
+              />
+              <div
+                *ngIf="
+                  submitted ||
+                  (profileform.get('state').invalid &&
+                    (profileform.get('state').dirty ||
+                      profileform.get('state').touched))
+                "
+                class="validall"
+              >
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.state.errors?.required"
+                >
+                  <sup>*</sup>Please enter your state
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.state.errors?.pattern"
+                >
+                  <sup>*</sup>state accept letter only
+                </div>
+
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.state.errors?.minLength"
+                >
+                  <sup>*</sup> Minimum length is 2
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.state.errors?.maxLength"
+                >
+                  <sup>*</sup> Maximum length is 50
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4>Phone</h4>
+          <div class="form-row mb-3">
+            <div class="form-group col-md-4">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="phone"
+                [ngClass]="{
+                  error: submitted && profileform.controls.phone.errors
+                }"
+                id="phone"
+              />
+              <div
+                *ngIf="
+                  submitted ||
+                  (profileform.get('phone').invalid &&
+                    (profileform.get('phone').dirty ||
+                      profileform.get('phone').touched))
+                "
+                class="validall"
+              >
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.phone.errors?.required"
+                >
+                  <sup>*</sup>Please enter your phone
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.phone.errors?.pattern"
+                >
+                  <sup>*</sup>phone accept numbers only
+                </div>
+
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.phone.errors?.minLength"
+                >
+                  <sup>*</sup> Minimum length is 11
+                </div>
+                <div
+                  class="validall"
+                  *ngIf="profileform.controls.phone.errors?.maxLength"
+                >
+                  <sup>*</sup> Maximum length is 11
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row mb-4">
+            <div class="form-group offset-4 col-md-4">
+              <input type="submit" class="btn signIn" value="Sign in" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
