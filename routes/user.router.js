@@ -46,4 +46,11 @@ router.post(
   ctrlUser.editUserProfile
 );
 
+router.post("/ratecourse", ctrlUser.rateCourse);
+router.post("/addfavouritcourse/:id", ctrlUser.addFavouritCourse);
+router.post("/removefavouritcourse/:id", ctrlUser.removeFavouritCourse);
+router.get("/favouritcourses/:id", ctrlUser.getUserFavouritCourses);
+router.post("/followInst", ctrlUser.followInst);
+router.post("/unFollowInst", ctrlUser.unFollowInst);
+router.get("/followingInst/:id", ctrlUser.followingInst);
 module.exports = router;

@@ -9,7 +9,9 @@ mongoose.connect("mongodb://localhost:27017/veavo-backend", (err) => {
 });
 
 require("./user.model");
-require("./course-category.model");
+require("./rating.model");
 require("./course-comment.model");
 require("./course.model");
-require("./user.model");
+require("./instructor.model");
+require("./inst-rating.model");
+require("./book-course.model");

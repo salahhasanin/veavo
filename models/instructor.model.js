@@ -30,19 +30,20 @@ const InstructorSchema = new Schema({
   // bithday: Date,
   // phone: String,
 
+  jobTitle: { type: String, required: [true, "can't be blank"] },
   description: { type: String, required: [true, "can't be blank"] },
   college: { type: String, required: [true, "can't be blank"] },
   education: { type: String, required: [true, "can't be blank"] },
-  governorate: { type: String, required: [true, "can't be blank"] },
   yearsOfExperience: { type: Number, required: [true, "can't be blank"] },
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  myCourses: [{ type: Schema.Types.ObjectId, ref: "Courses" }],
-  rating: [Number],
+  myCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+  userRate: [{ type: Schema.Types.ObjectId, ref: "InstRating" }],
   socialMedia: {
     facebook: String,
     twitter: String,
-    google: String,
+    linkedin: String,
   },
+  userId: { type: Schema.Types.ObjectId, ref: "User" },
   //   totalStudent
   //   reviewers
 });

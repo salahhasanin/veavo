@@ -1,0 +1,140 @@
+ <div class="mx-auto" *ngFor="let x of y; let i = index">
+      <div class="card cardWidth mb-3">
+        <div class="circleProgress">
+          <circle-progress
+            [percent]="x.coursRegistration"
+            [radius]="6"
+            [outerStrokeWidth]="1"
+            [innerStrokeWidth]="1"
+            [space]="-1"
+            [outerStrokeColor]="'#ff754e'"
+            [innerStrokeColor]="'#e7e8ea'"
+            [titleColor]="'#fff'"
+            [unitsColor]="'#fff'"
+            [titleFontSize]="4"
+            [unitsFontSize]="4"
+            [showSubtitle]="false"
+            [animation]="true"
+            [animationDuration]="100"
+            [startFromZero]="false"
+            [responsive]="true"
+          ></circle-progress>
+        </div>
+
+        <img src="{{ x.img }}" class="card-img-top" alt="..." />
+        <div class="card-body cardBodyTopRated">
+          <div class="row mb-2 ml-1 ml-sm-0">
+            <h5 class="card-title">{{ x.title }}</h5>
+          </div>
+          <div class="row mb-1 ml-1 ml-sm-0">
+            <p class="card-text course-text">{{ x.description }}</p>
+          </div>
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <ngx-stars
+              [readonly]="false"
+              [size]="2"
+              [color]="'#FDCC0D'"
+              [initialStars]="totalRate"
+              [customStarIcons]="heartIcons"
+              (ratingOutput)="onRatingSet($event)"
+            ></ngx-stars>
+          </div>
+          <br /><br />
+          <div class="row mt-1 ml-1 ml-sm-0">
+            <p class="strikethroughPriceDiscount">
+              {{ x.anotherDiscount }}
+            </p>
+            <p class="Discount mx-3">{{ x.Discount }}</p>
+            <div class="discountBTN">{{ x.buttonText }}</div>
+          </div>
+          <br />
+          <div class="row mt-4">
+            <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+            <div class="heartStle ml-4 ml-sm-0" (click)="addFavourite(x.id, i)">
+              <i
+                [ngClass]="
+                  fourite.indexOf(x.id) !== -1
+                    ? 'fas fa-heart full-heart'
+                    : 'far fa-heart empty-heart'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div *ngIf="topRatedCourses">
+      <div
+        class="mx-auto"
+        *ngFor="let course of topRatedCourses; let i = index"
+      >
+        <div class="card cardWidth mb-3 mr-1">
+          <div class="circleProgress"></div>
+          <a [routerLink]="['/course/', course?._id._id]" class="coursLink">
+            <img
+              [src]="(course?._id.mainImage)[0].url"
+              class="card-img-top"
+              alt="..."
+            />
+          </a>
+          <div class="card-body cardBodyTopRated">
+            <div class="row mb-2 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course?._id._id]" class="coursLink">
+                <h5 class="card-title">{{ course?._id.courseName }}</h5>
+              </a>
+            </div>
+            <div class="row mb-1 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course?._id._id]" class="coursLink">
+                <p class="card-text">{{ course?._id.courseDescription }}</p>
+              </a>
+            </div>
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <app-rate-course
+                [courseId]="course?._id._id"
+                [courseRate]="course?._id.rate"
+              ></app-rate-course>
+            </div>
+            <br /><br />
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <p class="strikethroughPriceDiscount">
+                {{ course?._id.priviousSalary }}
+              </p>
+              <p class="Discount mx-3">{{ course?._id.salary }}</p>
+              <div class="discountBTN">
+                {{
+                  100 - (course?._id.salary / course?._id.priviousSalary) * 100
+                    | intNumber
+                }}%
+              </div>
+            </div>
+            <br />
+            <div class="row mt-4">
+              <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+              <app-favorite-button
+                class="heartStle ml-4 ml-sm-0"
+                [user]="userData"
+                [courseId]="course?._id._id"
+                (toggle)="onToggleFavorite($event)"
+              >
+              </app-favorite-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

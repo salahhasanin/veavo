@@ -1,0 +1,722 @@
+$mainColor: #ff754e;
+$secondMainColor: #ffffffff;
+$backgroundImge: linear-gradient($mainColor, #ff9374);
+$textAlign: center;
+
+@mixin textOfferStyle {
+    position: relative;
+    float: left;
+    color: $secondMainColor;
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+%textOfferStyle {
+    @include textOfferStyle;
+}
+
+@mixin bookOfferStyle {
+    position: relative;
+    float: right;
+    margin-right: 70px;
+    background-color: $mainColor;
+    color: $secondMainColor;
+    border: $mainColor;
+    border-radius: 10px;
+}
+
+%bookOfferStyle {
+    @include bookOfferStyle;
+}
+
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+}
+
+// carousel style
+::ng-deep .carousel-indicators {
+    height: 10px;
+}
+
+::ng-deep .carousel-indicators li {
+    transform: translateY(-200%);
+    cursor: pointer;
+    height: 10px;
+    width: 11px;
+    border-radius: 50%;
+}
+
+::ng-deep .carousel-indicators .active {
+    background-color: #4a43db;
+}
+
+.carousel-inner {
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.carousel-caption {
+    transform: translateY(-90%);
+    text-align: $textAlign;
+    vertical-align: middle;
+}
+
+.carousel-caption h2 {
+    font-weight: bold;
+    text-align: $textAlign;
+    font-size: 75px;
+}
+
+.startSlogann {
+    text-align: left;
+    font-size: 25px;
+}
+
+.finishSlogann {
+    text-align: right;
+    font-size: 25px;
+}
+
+// search style
+.searchform {
+    background-color: $mainColor;
+    text-align: $textAlign;
+    z-index: 16;
+    border-radius: 20px;
+    height: 90px;
+    display: flex;
+
+    .searchFormStyle {
+        text-align: center;
+
+        input {
+            width: 280px;
+            height: 50px;
+            background-color: #ffb6a1;
+            border-color: #ffb6a1;
+        }
+
+        ::placeholder {
+            color: $mainColor;
+        }
+
+        button {
+            background-color: $secondMainColor;
+            color: $mainColor;
+            width: 120px;
+            border-color: $secondMainColor;
+            font-size: 20px;
+        }
+    }
+}
+
+/*
+   /////////////////////////////////////////
+   ////////////////////////////////////////
+*/
+.fullOffers {
+    position: relative;
+}
+
+.offers {
+    position: absolute;
+}
+
+.fullOffers img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.textOffer {
+    @extend %textOfferStyle;
+    margin-left: 70px;
+    font-size: 25px;
+    top: 150px;
+}
+
+.percentgeOffer {
+    font-size: 50px;
+}
+
+.generalOffer {
+    float: right;
+}
+
+.bookOffer {
+    @extend %bookOfferStyle;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    top: 180px;
+}
+
+/*
+   ///////////////////////////
+   ///////////////////////
+*/
+/*
+// .card {
+//   border-radius: 20px;
+// }
+// .card img {
+//   height: 280px;
+// }
+// .photoInfo {
+//   position: relative;
+// }
+// .cardHeader {
+//   position: relative;
+// }
+// .card-info-button {
+//   position: relative;
+//   bottom: 20px;
+// }
+// .category {
+//   background-image: $backgroundImge;
+//   border-radius: 9px;
+//   position: absolute;
+//   margin-left: 15px;
+//   width: 90px;
+//   height: 30px;
+//   text-align: $textAlign;
+//   color: $secondMainColor;
+//   padding: 5px;
+//   top: 250px;
+// }
+// .strikethroughPriceDiscount {
+//   text-decoration: line-through;
+//   display: inline;
+// }
+// .Discount {
+//   display: inline;
+// }
+// circle-progress {
+//   position: absolute;
+//   left: 170px;
+// }
+// .location {
+//   position: absolute;
+//   background-image: linear-gradient(#4a43db, #716af6);
+//   border-radius: 9px;
+//   color: $secondMainColor;
+//   width: 90px;
+//   height: 30px;
+//   padding: 7px;
+//   top: 250px;
+// }
+// .location .locationPlace {
+//   display: inline;
+// }
+// .cardTopRated {
+//   width: 16rem;
+//   .cardBodyTopRated {
+//     line-height: 10px;
+//   }
+//   .discountBTN {
+//     background-color: transparent;
+//     border: 1px solid black;
+//     width: 90px;
+//     height: 30px;
+//     padding-top: 7px;
+//     padding-bottom: 7px;
+//     text-align: center;
+//   }
+//   .bookNow {
+//     position: absolute;
+//     background-image: $backgroundImge;
+//     border-color: $mainColor;
+//     left: 0;
+//     width: 130px;
+//   }
+//   .fa-heart {
+//     font-size: 30px;
+//     color: $mainColor;
+//   }
+// }*/
+//////////////////////////////////////////////////////////////////////////////////
+.card {
+    border-radius: 20px;
+
+    .card-img-top {
+        height: 15rem;
+    }
+
+    .cardBodyTopRated {
+        line-height: 10px;
+
+        .course-text {
+            width: 14.5rem;
+            white-space: nowrap;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 20px;
+        }
+
+        .strikethroughPriceDiscount {
+            text-decoration: line-through;
+            color: #acacac;
+            display: inline;
+        }
+
+        .Discount {
+            display: inline;
+        }
+
+        .discountBTN {
+            background-color: transparent;
+            text-align: center;
+            color: $mainColor;
+            font-size: 20px;
+        }
+
+        .bookNow {
+            position: absolute;
+            background-image: $backgroundImge;
+            border-color: $mainColor;
+            width: 160px;
+            height: 45px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 7px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 20px;
+            left: 0;
+            bottom: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .heartStle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-right: 30px;
+
+            .empty-heart {
+                font-size: 40px;
+                color: $mainColor;
+            }
+        }
+
+        .full-heart {
+            font-size: 40px;
+            color: $mainColor;
+        }
+    }
+}
+
+.circleProgress {
+    position: relative;
+}
+
+circle-progress {
+    position: absolute;
+    left: 240px;
+    top: -15px;
+}
+
+.category {
+    background-image: $backgroundImge;
+    border-radius: 9px;
+    position: absolute;
+    margin-left: 15px;
+    width: 90px;
+    height: 30px;
+    text-align: $textAlign;
+    color: $secondMainColor;
+    padding: 5px;
+    top: 250px;
+}
+
+.location {
+    position: absolute;
+    background-image: linear-gradient(#4a43db, #716af6);
+    border-radius: 9px;
+    color: $secondMainColor;
+    width: 90px;
+    height: 30px;
+    padding: 7px;
+    top: 250px;
+}
+
+.location .locationPlace {
+    display: inline;
+}
+
+/*
+   //////////////////////////////
+   /////////////////////////////
+*/
+.instructorCard {
+    border: none;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+}
+
+.instrucrorImg {
+    border-radius: 50%;
+    width: 180px;
+}
+
+.instrucrorName {
+    font-weight: bold;
+    font-size: 20px;
+    // text-align: $textAlign;
+}
+
+.instrucrorJob {
+    font-size: 15px;
+    // text-align: $textAlign;
+}
+
+.FollowInstructor {
+    text-align: $textAlign;
+    background-image: $backgroundImge;
+    color: $secondMainColor;
+    border: $mainColor;
+    font-size: 11;
+    width: 130px;
+    height: 40px;
+}
+
+.socialInstructor {
+    text-align: $textAlign;
+    font-size: 30px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .searchform {
+        height: 220px;
+        display: flex;
+
+        .searchFormStyle {
+            text-align: center;
+
+            input {
+                width: 400px;
+                height: 50px;
+                background-color: #ffb6a1;
+                border-color: #ffb6a1;
+            }
+
+            button {
+                background-color: $secondMainColor;
+                color: $mainColor;
+                width: 90px;
+                border-color: $secondMainColor;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .cardTopRated {
+        width: 18rem;
+    }
+
+    .textOffer {
+        font-size: 10px;
+        line-height: 30px;
+    }
+
+    .offerImage {
+        height: 140px;
+    }
+
+    .textOffer {
+        @include textOfferStyle;
+        font-size: 25px;
+        margin-left: 70px;
+        top: 100px;
+        line-height: 25px;
+    }
+
+    .percentgeOffer {
+        font-size: 35px;
+    }
+
+    .bookOffer {
+        @include bookOfferStyle;
+        font-size: 18px;
+        width: 130px;
+        height: 45px;
+        top: 125px;
+    }
+
+    //
+    //
+    .card-img-top {
+        height: 5rem;
+    }
+
+    .course-text {
+        width: 30rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 20px;
+    }
+
+    .heartStle {
+        margin-right: 10px;
+    }
+
+    .instrucrorJob {
+        margin-bottom: 10px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .searchform {
+        height: 220px;
+        display: flex;
+
+        .searchFormStyle {
+            text-align: center;
+
+            input {
+                width: 400px;
+                height: 50px;
+                background-color: #ffb6a1;
+                border-color: #ffb6a1;
+            }
+
+            button {
+                background-color: $secondMainColor;
+                color: $mainColor;
+                width: 120px;
+                border-color: $secondMainColor;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .cardTopRated {
+        width: 14.5rem;
+    }
+
+    // circle-progress {
+    //   position: absolute;
+    //   left: 150px;
+    // }
+    .offerImage {
+        height: 150px;
+    }
+
+    .textOffer {
+        @include textOfferStyle;
+        font-size: 20px;
+        margin-left: 70px;
+        top: 100px;
+        line-height: 25px;
+    }
+
+    .percentgeOffer {
+        font-size: 30px;
+    }
+
+    .bookOffer {
+        @include bookOfferStyle;
+        font-size: 18px;
+        width: 130px;
+        height: 45px;
+        top: 100px;
+    }
+
+    //
+    //
+    .cardWidth {
+        width: 16.5rem;
+
+        circle-progress {
+            position: absolute;
+            left: 150px;
+        }
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .slogan {
+        top: 150px;
+
+        h2 {
+            font-size: 50px;
+        }
+    }
+
+    .searchform {
+        bottom: 70px;
+        height: 90px;
+        display: flex;
+
+        .searchFormStyle {
+            text-align: center;
+
+            input {
+                width: 230px;
+                height: 50px;
+                background-color: #ffb6a1;
+                border-color: #ffb6a1;
+            }
+
+            button {
+                background-color: $secondMainColor;
+                color: $mainColor;
+                width: 90px;
+                border-color: $secondMainColor;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .cardTopRated {
+        width: 16rem;
+    }
+
+    .textOffer {
+        @include textOfferStyle;
+        font-size: 20px;
+        margin-left: 70px;
+        top: 100px;
+        line-height: 25px;
+    }
+
+    .percentgeOffer {
+        font-size: 30px;
+    }
+
+    .bookOffer {
+        @include bookOfferStyle;
+        font-size: 18px;
+        width: 130px;
+        height: 45px;
+        top: 100px;
+    }
+
+    //
+
+    //
+    .cardWidth {
+        width: 14.5rem;
+
+        .heartStle {
+            margin-right: 10px;
+        }
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .slogan {
+        top: 200px;
+
+        h2 {
+            font-size: 70px;
+        }
+    }
+
+    .searchform {
+        bottom: 70px;
+        height: 90px;
+        display: flex;
+
+        .searchFormStyle {
+            text-align: center;
+
+            input {
+                width: 250px;
+                height: 50px;
+                background-color: #ffb6a1;
+                border-color: #ffb6a1;
+            }
+
+            button {
+                background-color: $secondMainColor;
+                color: $mainColor;
+                width: 100px;
+                border-color: $secondMainColor;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .cardTopRated {
+        width: 16rem;
+    }
+
+    .offerImage {
+        height: 200px;
+    }
+
+    .textOffer {
+        @include textOfferStyle;
+        font-size: 25px;
+        margin-left: 70px;
+        top: 140px;
+    }
+
+    .percentgeOffer {
+        font-size: 50px;
+    }
+
+    .bookOffer {
+        @include bookOfferStyle;
+        font-size: 20px;
+        width: 150px;
+        height: 50px;
+        top: 145px;
+    }
+
+    //
+    //
+    .cardWidth {
+        width: 19rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .slogan {
+
+        // bottom: 100px;
+        h2 {
+            font-size: 70px;
+        }
+    }
+
+    .cardTopRated {
+        width: 16rem;
+    }
+
+    .offerImage {
+        height: 220px;
+    }
+
+    .textOffer {
+        @include textOfferStyle;
+        font-size: 25px;
+        margin-left: 70px;
+        top: 140px;
+    }
+
+    .percentgeOffer {
+        font-size: 50px;
+    }
+
+    .bookOffer {
+        @include bookOfferStyle;
+        font-size: 20px;
+        width: 150px;
+        height: 50px;
+        top: 150px;
+    }
+
+    //
+    //
+    .cardWidth {
+        width: 17rem;
+    }
+}

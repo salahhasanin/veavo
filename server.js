@@ -6,31 +6,35 @@ require("./config/passport");
 const _ = require("lodash");
 const bodyParser = require("body-parser");
 const express = require("express");
+// const elasticsearch = require("elasticsearch");
 const app = express();
 const http = require("http").createServer(app);
-// const io = require("socket.io")(http);
+// var io = require('socket.io')(http);
 const path = require("path");
-// const favicon = require("serve-favicon");
-// const logger = require("morgan");
-// const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const session = require("express-session");
 const cors = require("cors");
 
 const rtsIndex = require("./routes/authentication.router");
 const rtsUser = require("./routes/user.router");
-
-app.use(
-  session({
-    secret: "s3cr3t",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
-  })
-);
+const rtsInst = require("./routes/instructor.router");
+const rtsCourse = require("./routes/course.router");
+// const client = new elasticsearch.Client({
+//   hosts: ["http://localhost:9200"],
+// });
+// app.use(
+//   session({
+//     secret: "s3cr3t",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false },
+//   })
+// );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -41,19 +45,21 @@ app.use(cors());
 
 app.use("/auth", rtsIndex);
 app.use("/user", rtsUser);
-// app.use("/chat", rtsChat);
-
-// socket io
-// io.on("connection", function(socket) {
-//   console.log("User connected");
-//   socket.on("disconnect", function() {
-//     console.log("User disconnected");
-//   });
-//   socket.on("save-message", function(data) {
-//     // console.log(data);
-//     io.emit("new-message", { message: data });
-//   });
-// });
+app.use("/inst", rtsInst);
+app.use("/course", rtsCourse);
+// client.ping(
+//   {
+//     requestTimeout: 30000,
+//   },
+//   function (error) {
+//     // at this point, eastic search is down, please check your Elasticsearch service
+//     if (error) {
+//       console.error("Elasticsearch cluster is down!");
+//     } else {
+//       console.log("Everything is ok");
+//     }
+//   }
+// );
 // app.use(express.static(__dirname + "/chat/dist/chat"));
 // app.get("*", function(req, res) {
 //   res.sendFile(path.join(__dirname, "/chat/dist/chat/index.html"));

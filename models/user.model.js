@@ -5,17 +5,6 @@ const Schema = mongoose.Schema;
 
 var UserSchema = new Schema(
   {
-    // username: {
-    //   type: String,
-    //   lowercase: true,
-    //   unique: true,
-    //   // required: [true, "can't be blank"],
-    //   match: [/^[a-zA-Z0-9]+$/, "is invalid"],
-    //   minlength: 2,
-    //   maxlength: 50,
-    //   trim: true,
-    //   index: true,
-    // },
     email: {
       type: String,
       lowercase: true,
@@ -36,9 +25,8 @@ var UserSchema = new Schema(
       minlength: [4, "Password must be atleast 4 character long"],
     },
     image: [{ url: String, public_id: String }],
-
-    favouriteCourses: [{ type: Schema.Types.ObjectId, ref: "Courses" }],
-    bookedCourses: [{ type: Schema.Types.ObjectId, ref: "Courses" }],
+    favouriteCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+    bookedCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
     phone: {
       type: String,
       // required: [true, "can't be blank"],
@@ -62,8 +50,11 @@ var UserSchema = new Schema(
       required: "role is required",
       enum: ["student", "instructor"],
     },
+    rate: [{ type: Schema.Types.ObjectId, ref: "Rating" }],
+    rateInst: [{ type: Schema.Types.ObjectId, ref: "InstRating" }],
     follows: [{ type: Schema.Types.ObjectId, ref: "Instructor" }],
     instructor: { type: Schema.Types.ObjectId, ref: "Instructor" },
+    bookedCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
     salt: String,
     //   payment
   },
