@@ -1,0 +1,10 @@
+<div class="heartStle ml-4 ml-sm-0 pl-5" (click)="toggleFavorite()">
+  <i
+    [ngClass]="
+      courseExsist ? 'fas fa-heart full-heart' : 'far fa-heart empty-heart'
+    "
+  ></i>
+</div>
+<!--  disabled: isSubmitting,
+  'far fa-heart empty-heart': courseExsist,
+'fas fa-heart full-heart': !courseExsist -->

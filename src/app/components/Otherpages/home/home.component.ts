@@ -1,6 +1,8 @@
+import { GeneralService } from "./../../../services/general.service";
 import { Component, OnInit, HostListener } from "@angular/core";
 import { NgxSmartModalService } from "ngx-smart-modal";
 import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
+
 // import { StarRatingComponent } from "ng-starrating";
 import { CarouselConfig } from "ngx-bootstrap/carousel";
 @Component({
@@ -19,21 +21,33 @@ import { CarouselConfig } from "ngx-bootstrap/carousel";
 })
 export class HomeComponent implements OnInit {
   showIndicators = true;
+  itemsPerSlide = 4;
   width: number = window.innerWidth;
   searchformm: FormGroup;
   totalRate = 1;
   fourite = [];
   indexs;
   productItem;
+  homeDataSubscribe: any;
+  newCourses: any;
+  topRatedCourses: any;
+  topRatedInst: any;
+
   constructor(
     public ngxSmartModalService: NgxSmartModalService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private generalService: GeneralService
   ) {}
 
   ngOnInit() {
     this.searchformm = this.fb.group({
       coursecategory: ["", [Validators.required]],
       location: ["", [Validators.required]],
+    });
+    this.homeDataSubscribe = this.generalService.homeData().subscribe((res) => {
+      this.newCourses = res[0];
+      this.topRatedCourses = res[1];
+      this.topRatedInst = res[2];
     });
   }
 
@@ -164,7 +178,6 @@ export class HomeComponent implements OnInit {
 
   onRatingSet($event) {
     this.totalRate = $event;
-    // alert(`Rating is ${$event}`);
   }
 
   addFavourite(id, index) {
@@ -177,41 +190,7 @@ export class HomeComponent implements OnInit {
       this.fourite.push(id);
     }
   }
-  instrucrors = [
-    {
-      title: "Thomas Junior",
-      description: "UX Designer",
-      img: "../../../assets/login/Path9.png",
-    },
-    {
-      title: "Philip Edison",
-      description: "IOS Developer",
-      img: "../../../assets/login/Path9-1@2x.png",
-    },
-    {
-      title: "Any Name",
-      description: "Musician",
-      img: "../../../assets/login/Path9-2@2x.png",
-    },
-    {
-      title: "My Name",
-      description: "Android Developer",
-      img: "../../../assets/login/Path9-1@2x.png",
-    },
-  ];
 
-  // onRate($event: {
-  //   oldValue: number;
-  //   newValue: number;
-  //   starRating: StarRatingComponent;
-  // }) {
-  //   alert(
-  //     `
-  //     Old Value:${$event.oldValue},
-  //     New Value: ${$event.newValue},
-  //     `
-  //   );
-  // }
   //hide indecators on small and extra small screen
   onWindowResize(event) {
     this.width = event.target.innerWidth;

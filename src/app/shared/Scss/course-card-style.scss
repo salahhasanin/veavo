@@ -1,0 +1,187 @@
+$mainColor: #ff754e;
+$secondMainColor: #ffffffff;
+$backgroundImge: linear-gradient($mainColor, #ff9374);
+$textAlign: center;
+
+.card {
+  border-radius: 20px;
+
+  .card-img-top {
+    height: 10rem;
+    border-radius: 10px;
+    // width: 17rem;
+  }
+
+  .coursLink {
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+  }
+
+  .cardBodyTopRated {
+    line-height: 10px;
+
+    .card-title {
+      height: 50px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-text {
+      width: 14.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 20px;
+    }
+
+    .strikethroughPriceDiscount {
+      text-decoration: line-through;
+      color: #acacac;
+      display: inline;
+    }
+
+    .Discount {
+      display: inline;
+      font-size: 20px;
+    }
+
+    .discountBTN {
+      background-color: transparent;
+      text-align: center;
+      color: $mainColor;
+      font-size: 20px;
+    }
+
+    .bookNow {
+      position: absolute;
+      background-image: $backgroundImge;
+      border-color: $mainColor;
+      width: 160px;
+      height: 45px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 20px;
+      left: 0;
+      bottom: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .heartStle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-right: 30px;
+      font-size: 40px;
+      color: $mainColor;
+
+      .empty-heart {
+        font-size: 40px;
+        color: $mainColor;
+      }
+    }
+
+    .full-heart {
+      font-size: 40px;
+      color: $mainColor;
+    }
+  }
+}
+
+.circleProgress {
+  position: relative;
+}
+
+circle-progress {
+  position: absolute;
+  left: 240px;
+  top: -15px;
+}
+
+.category {
+  background-image: $backgroundImge;
+  border-radius: 9px;
+  position: absolute;
+  margin-left: 15px;
+  width: 90px;
+  height: 30px;
+  text-align: $textAlign;
+  color: $secondMainColor;
+  padding: 5px;
+  top: 250px;
+}
+
+.location {
+  position: absolute;
+  background-image: linear-gradient(#4a43db, #716af6);
+  border-radius: 9px;
+  color: $secondMainColor;
+  width: 90px;
+  height: 30px;
+  padding: 7px;
+  top: 250px;
+}
+
+.location .locationPlace {
+  display: inline;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .card-img-top {
+    height: 5rem;
+  }
+
+  .card-text {
+    width: 30rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+  }
+
+  .heartStle {
+    margin-right: 10px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .cardWidth {
+    width: 16.5rem;
+
+    circle-progress {
+      position: absolute;
+      left: 150px;
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .cardWidth {
+    width: 14.5rem;
+
+    .heartStle {
+      margin-right: 10px;
+    }
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .cardWidth {
+    width: 19rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .cardWidth {
+    width: 17rem;
+  }
+}

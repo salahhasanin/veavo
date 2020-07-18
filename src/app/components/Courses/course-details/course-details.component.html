@@ -1,3 +1,4 @@
+<!-- <app-navbar></app-navbar> -->
 <div class="container">
   <div class="courseDetails mt-5">
     <div class="row" *ngFor="let eachIntro of intro">
@@ -9,65 +10,92 @@
         <img class="mb-2 mr-sm-4 mr-3" src="{{ eachIntro.img4 }}" />
       </div>
       <div class="col-xl-6 col-lg-5 col-md-10 col-sm-9 col-9 mx-auto">
-        <div class="embed-responsive embed-responsive-1by1">
-          <iframe
-            class="embed-responsive-item"
-            src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-            allowfullscreen
-          ></iframe>
-        </div>
+        <!-- <div class="courseImage"> -->
+        <img [src]="(course?.mainImage)[0].url" class="courseImage" alt="" />
+        <!-- <mat-video
+            [autoplay]="true"
+            [preload]="true"
+            [fullscreen]="true"
+            spinner="hourglass"
+            [src]="course.video[0].url"
+          ></mat-video>
+        </div> -->
       </div>
 
       <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
-        <h5 class="courseInstructorName">{{ eachIntro.instructor }}</h5>
-        <h2>{{ eachIntro.coursename }}</h2>
+        <h5
+          class="courseInstructorName"
+          [routerLink]="['/instpage/', instructorDetails?._id]"
+        >
+          {{ userDetails?.fullname }}
+        </h5>
+        <h2>{{ course?.courseName }}</h2>
         <div class="row mt-1 ml-1">
-          <ngx-stars
-            [readonly]="false"
-            [size]="2"
-            [color]="'#FDCC0D'"
-            [initialStars]="totalRate"
-            [customStarIcons]="heartIcons"
-            (ratingOutput)="onRatingSet($event)"
-          ></ngx-stars>
+          <app-rate-course
+            [courseId]="course?._id"
+            [courseRate]="course?.rate"
+          ></app-rate-course>
         </div>
         <div class="courseDetailDescription">
-          <p>{{ eachIntro.courseDescription }}</p>
+          <p>{{ course?.courseDescription }}</p>
         </div>
         <div class="row">
-          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3">
-            <p class="strikethroughPriceDiscount">
-              {{ eachIntro.previousSalary }}
-            </p>
+          <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-3">
+            <p class="priviousSalaryStyle">{{ course?.priviousSalary }}L.E</p>
           </div>
           <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3">
-            <p>{{ eachIntro.Salary }}</p>
+            <p class="salaryStyle">{{ course?.salary }}L.E</p>
           </div>
-          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3">
-            <div class="follow">{{ eachIntro.courseSale }}</div>
+          <div class="col-xl-5 col-lg-4 col-md-3 col-sm-4 col-3">
+            <div *ngIf="course?.priviousSalary">
+              <div class="discountPercentStyle">
+                {{
+                  100 - (course?.salary / course?.priviousSalary) * 100
+                    | intNumber
+                }}% <span class="offStyle">off</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row mb-2">
           <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-3 ml-1 pr-1">
             <a href="#" class="btn btn-primary bookNow">BOOK NOW</a>
           </div>
-
-          <div
+          <app-favorite-button
             class="heartStle ml-4 ml-sm-0 pl-5"
-            (click)="mainCourseAddFavourite(eachIntro.id)"
+            [user]="userData"
+            [courseId]="course?._id"
+            (toggle)="onToggleFavorite($event)"
+          >
+          </app-favorite-button>
+          <!-- <div
+            class="heartStle ml-4 ml-sm-0 pl-5"
+            (click)="mainCourseAddFavourite(course?._id)"
           >
             <i
               [ngClass]="
-                fourite.indexOf(eachIntro.id) !== -1
+                fourite.indexOf(course?.id) !== -1
                   ? 'fas fa-heart full-heart'
                   : 'far fa-heart empty-heart'
               "
             ></i>
-          </div>
+          </div> -->
           <div
             class="col-xl-4 col-lg-4 col-md-3 col-sm-4 col-3 mx-auto shareStyle"
           >
-            <i class="fas fa-share-alt"><span class="ml-1">share</span></i>
+            <div class="dropdown categoryDropdown show">
+              <i class="fas fa-share-alt"><span class="ml-1">share</span></i>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-item">
+                  <!-- <share-buttons
+                    theme="material-dark"
+                    show="5"
+                    image="https://loremflickr.com/320/240"
+                  ></share-buttons> -->
+                  <div>Share will be here soon</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <p class="timeOfMoneyBack">30 Day Money Back Guarantee</p>
@@ -75,36 +103,101 @@
     </div>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-5">
+  <div class="row my-5">
+    <div class="col-10 offset-1 navigationItems">
+      <nav class="navbar navbar-expand">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a
+                class="nav-link navigationItem"
+                (click)="showItem('learnPoint')"
+                >LearnPoints</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link navigationItem"
+                (click)="showItem('prerequists')"
+                >Prerequists</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link navigationItem" (click)="showItem('comments')"
+                >Comments</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link navigationItem"
+                (click)="showItem('instructor')"
+                >Instructor</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navigationItem" (click)="showItem('related')"
+                >Related</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row mt-5" *ngIf="learnPoint">
+    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mb-5">
       <div class="whatLearn">
         <h4>What You Learn</h4>
-        <ul *ngFor="let eachLearn of learn">
+        <ul *ngFor="let eachLearn of course?.learnPoint">
           <li>{{ eachLearn }}</li>
         </ul>
       </div>
     </div>
-    <div class="col-1"></div>
     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
       <div class="courseCalender">
         <h4>This Course Includes</h4>
         <div>
-          <span>2 Days a Weak</span>
+          <span
+            ><i class="far fa-calendar-alt mr-2"></i>
+            {{ course?.courseIncludes.timesInWeek }} Days a Weak</span
+          >
         </div>
         <div>
-          <span>25 Materials</span>
+          <span
+            ><i class="fas fa-book mr-2"></i>
+            {{ course?.courseIncludes.numOfMaterial }} Materials</span
+          >
         </div>
         <div>
-          <span>19 Exercises</span>
+          <span
+            ><i class="fas fa-check-double mr-2"></i
+            >{{ course?.courseIncludes.exercise }} Exercises</span
+          >
         </div>
-        <div>
-          <span>Certificate of Completion</span>
+        <div *ngIf="course?.courseIncludes.certificate">
+          <span
+            ><i class="fas fa-certificate mr-2"></i>Certificate of
+            Completion</span
+          >
         </div>
       </div>
     </div>
   </div>
+  <div class="row mt-5" *ngIf="prerequists">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+      <div class="whatLearn">
+        <h4>Prerequists</h4>
+        <ul *ngFor="let prerequist of course?.prerequists">
+          <li>{{ prerequist }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  <div class="row mt-5">
+  <div class="row mt-5" *ngIf="comments">
     <div
       class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-5 reviewers mx-auto"
     >
@@ -214,63 +307,59 @@
     </div>
   </div>
 
-  <div class="row mt-5 instructorInfo">
+  <div class="row mt-5 instructorInfo" *ngIf="instructor">
     <div class="col-sm-3 col-12 instructorIMGPosition">
       <div class="instructorIMGPosition">
         <img
+          [routerLink]="['/instpage/', instructorDetails?._id]"
           class="mt-3 instructorIMG"
-          src="../../../assets/home/Path9-1.png"
+          [src]="(userDetails?.image)[0].url"
           alt="Instructor Photo"
         />
       </div>
       <br />
       <div class="instructorRate mb-2">4.5 (1.335)</div>
       <div class="row mt-1 ml-1">
-        <ngx-stars
-          [readonly]="false"
-          [size]="2"
-          [color]="'#FDCC0D'"
-          [initialStars]="totalRate"
-          [customStarIcons]="heartIcons"
-          (ratingOutput)="onRatingSet($event)"
-        ></ngx-stars>
+        <div class="offset-2">
+          <!-- <ngx-stars
+            [readonly]="false"
+            [size]="2"
+            [color]="'#FDCC0D'"
+            [initialStars]="totalRate"
+            [customStarIcons]="heartIcons"
+            (ratingOutput)="onRatingSet($event)"
+          ></ngx-stars> -->
+          <app-rate-inst [instId]="instructorDetails?._id"></app-rate-inst>
+        </div>
       </div>
 
       <button class="instructorFollow mb-2">follow</button>
     </div>
 
     <div class="mt-2 col-sm-9 col-12">
-      <h2>john william said</h2>
+      <h2 [routerLink]="['/instpage/', instructorDetails?._id]">
+        {{ userDetails?.fullname }}
+      </h2>
       <p class="instructorJob">UX Designer</p>
       <p class="instructorbrief">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        corrupti officia, eius exercitationem dolorem eum necessitatibus eaque,
-        accusamus cum recusandae qui rerum quis nostrum nulla. Illum enim
-        eligendi sequi dolorem nostrum aperiam animi harum, facere consequatur
-        fuga? Laboriosam nemo provident accusamus, omnis, dolore sunt culpa
-        neque laudantium animi earum, modi fugit impedit? Magnam aspernatur qui
-        dignissimos id ducimus aliquid temporibus molestias, possimus nesciunt
-        aliquam ea maxime quaerat officiis facilis. Possimus eos debitis earum?
-        Nulla, consectetur explicabo. Libero tempora quis quibusdam praesentium
-        at sit est maxime eius dolorem sequi id totam, incidunt voluptas.
-        Reiciendis, adipisci! Tempore quo voluptatibus eaque quia laborum.
-        Molestias iste fuga animi enim voluptate nisi aspernatur quibusdam. Ea
-        tempore quos repellendus velit saepe autem modi natus in nihil quidem
-        rem recusandae distinctio
+        {{ instructorDetails?.description }}
       </p>
     </div>
   </div>
-  <div class="mt-5">
+  <div class="mt-5" *ngIf="related">
     <h2 class="mb-4">Related Courses</h2>
   </div>
-  <div class="row">
+
+  <div class="row" *ngIf="related">
     <div
       class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
-      *ngFor="let x of y; let i = index"
+      *ngFor="let relatedcourse of relatedCourses; let i = index"
     >
-      <div class="card cardWidth mb-3">
-        <div class="circleProgress">
-          <circle-progress
+      <!-- <div *ngIf="relatedcourse._id != course._id"> -->
+      <div *ngIf="relatedCourses">
+        <div class="card cardWidth mb-3">
+          <div class="circleProgress">
+            <!-- <circle-progress
             [percent]="x.coursRegistration"
             [radius]="6"
             [outerStrokeWidth]="1"
@@ -287,52 +376,73 @@
             [animationDuration]="100"
             [startFromZero]="false"
             [responsive]="true"
-          ></circle-progress>
-        </div>
+          ></circle-progress> -->
+          </div>
+          <a [routerLink]="['/course/', relatedcourse._id]" class="coursLink">
+            <!-- <a (click)="goToCourseDetails(relatedcourse._id)" class="coursLink"> -->
+            <img
+              [src]="(relatedcourse?.mainImage)[0].url"
+              class="card-img-top"
+              alt="..."
+            />
+          </a>
+          <div class="card-body cardBodyTopRated">
+            <div class="row mb-2 ml-1 ml-sm-0">
+              <a
+                [routerLink]="['/course/', relatedcourse._id]"
+                class="coursLink"
+              >
+                <!-- <a (click)="goToCourseDetails(relatedcourse._id)" class="coursLink"> -->
+                <h5 class="card-title">{{ relatedcourse?.courseName }}</h5>
+              </a>
+            </div>
+            <div class="row mb-1 ml-1 ml-sm-0">
+              <a
+                [routerLink]="['/course/', relatedcourse._id]"
+                class="coursLink"
+              >
+                <!-- <a (click)="goToCourseDetails(relatedcourse._id)" class="coursLink"> -->
+                <p class="card-text">
+                  {{ relatedcourse?.courseDescription }}
+                </p>
+              </a>
+            </div>
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <app-rate-course
+                [courseId]="relatedcourse?._id"
+              ></app-rate-course>
+            </div>
+            <br /><br />
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <p class="strikethroughPriceDiscount">
+                {{ relatedcourse?.priviousSalary }}
+              </p>
+              <p class="Discount mx-3">{{ relatedcourse?.salary }}</p>
+              <div class="discountBTN">
+                {{
+                  100 -
+                    (relatedcourse?.salary / relatedcourse?.priviousSalary) *
+                      100 | intNumber
+                }}%
+              </div>
+            </div>
+            <br />
+            <div class="row mt-4">
+              <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
 
-        <img src="{{ x.img }}" class="card-img-top" alt="..." />
-        <div class="card-body cardBodyTopRated">
-          <div class="row mb-2 ml-1 ml-sm-0">
-            <h5 class="card-title">{{ x.title }}</h5>
-          </div>
-          <div class="row mb-1 ml-1 ml-sm-0">
-            <p class="card-text">{{ x.description }}</p>
-          </div>
-          <div class="row mt-1 ml-1 ml-sm-0">
-            <ngx-stars
-              [readonly]="false"
-              [size]="2"
-              [color]="'#FDCC0D'"
-              [initialStars]="totalRate"
-              [customStarIcons]="heartIcons"
-              (ratingOutput)="onRatingSet($event)"
-            ></ngx-stars>
-          </div>
-          <br /><br />
-          <div class="row mt-1 ml-1 ml-sm-0">
-            <p class="strikethroughPriceDiscount">
-              {{ x.anotherDiscount }}
-            </p>
-            <p class="Discount mx-3">{{ x.Discount }}</p>
-            <div class="discountBTN">{{ x.buttonText }}</div>
-          </div>
-          <br />
-          <div class="row mt-4">
-            <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
-
-            <div class="heartStle ml-4 ml-sm-0" (click)="addFavourite(x.id, i)">
-              <i
-                [ngClass]="
-                  fourite.indexOf(x.id) !== -1
-                    ? 'fas fa-heart full-heart'
-                    : 'far fa-heart empty-heart'
-                "
-              ></i>
+              <app-favorite-button
+                class="heartStle ml-4 ml-sm-0"
+                [user]="userData"
+                [courseId]="relatedcourse?._id"
+                (toggle)="onToggleFavorite($event)"
+              >
+              </app-favorite-button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </div>
   <br />
   <br />

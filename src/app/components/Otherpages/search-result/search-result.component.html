@@ -1,0 +1,108 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="container zb">
+  <br />
+  <br />
+  <div *ngIf="searchResult">
+    <h2 class="mb-4 favouritHeader">Search Result</h2>
+    <div class="row mt-3">
+      <div
+        class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
+        *ngFor="let course of searchResult; let i = index"
+      >
+        <div *ngIf="searchResult?.length > 0; else noFavourite">
+          <div class="card cardWidth mb-3">
+            <div class="circleProgress">
+              <!-- <circle-progress
+        [percent]="x.coursRegistration"
+        [radius]="6"
+        [outerStrokeWidth]="1"
+        [innerStrokeWidth]="1"
+        [space]="-1"
+        [outerStrokeColor]="'#ff754e'"
+        [innerStrokeColor]="'#e7e8ea'"
+        [titleColor]="'#fff'"
+        [unitsColor]="'#fff'"
+        [titleFontSize]="4"
+        [unitsFontSize]="4"
+        [showSubtitle]="false"
+        [animation]="true"
+        [animationDuration]="100"
+        [startFromZero]="false"
+        [responsive]="true"
+      ></circle-progress> -->
+            </div>
+            <a [routerLink]="['/course/', course._id]" class="coursLink">
+              <img
+                [src]="course.mainImage[0].url"
+                class="card-img-top"
+                alt="..."
+              />
+            </a>
+            <div class="card-body cardBodyTopRated">
+              <div class="row mb-2 ml-1 ml-sm-0">
+                <a [routerLink]="['/course/', course._id]" class="coursLink">
+                  <h5 class="card-title">{{ course?.courseName }}</h5>
+                </a>
+              </div>
+              <div class="row mb-1 ml-1 ml-sm-0">
+                <a [routerLink]="['/course/', course._id]" class="coursLink">
+                  <p class="card-text">{{ course?.courseDescription }}</p>
+                </a>
+              </div>
+              <div class="row mt-1 ml-1 ml-sm-0">
+                <app-rate-course
+                  [courseId]="course?._id"
+                  [courseRate]="course?.rate"
+                ></app-rate-course>
+              </div>
+              <br /><br />
+              <div class="row mt-1 ml-1 ml-sm-0">
+                <p class="strikethroughPriceDiscount">
+                  {{ course?.priviousSalary }}
+                </p>
+                <p class="Discount mx-3">{{ course?.salary }}</p>
+                <div *ngIf="course?.priviousSalary">
+                  <div class="discountBTN">
+                    {{
+                      100 - (course?.salary / course?.priviousSalary) * 100
+                        | intNumber
+                    }}%off
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row mt-4">
+                <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+                <div
+                  class="heartStle ml-4 ml-sm-0"
+                  (click)="removeFavourite(course?._id)"
+                >
+                  <i
+                    Class="
+                 fas fa-heart full-heart
+                   
+                "
+                  ></i>
+                  <!-- <i
+                [ngClass]=
+                "
+                  fourite.indexOf(course.id) !== -1
+                    ? 'fas fa-heart full-heart'
+                    : 'far fa-heart empty-heart'
+                "
+              ></i> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ng-template #noFavourite> -->
+  <div class="noFavouriteDiv" *ngIf="!searchResult?.length > 0">
+    <p class="noFavouriteP">This Course Not Found</p>
+  </div>
+  <!-- </ng-template> -->
+</div>

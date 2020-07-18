@@ -1,3 +1,5 @@
+// @import "~ngx-sharebuttons/themes/material/material-dark-theme";
+// @import "~ngx-sharebuttons/themes/modern/modern-light-theme";
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
@@ -28,6 +30,8 @@ $veavo-theme: mat-light-theme($veavo-primary, $veavo-accent, $veavo-warn);
 /* You can add global styles to this file, and also import other style files */
 @import "~owl.carousel/dist/assets/owl.carousel.css";
 @import "~owl.carousel/dist/assets/owl.theme.default.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
 @import "~ngx-smart-modal/ngx-smart-modal";
 
 html,

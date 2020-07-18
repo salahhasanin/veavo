@@ -1,9 +1,10 @@
+import { CourseService } from "src/app/services/course.service";
 import { UserService } from "./../../../services/user.service";
 import { AuthService } from "./../../../services/auth.service";
 import { Component, OnInit, Renderer2, ElementRef } from "@angular/core";
 import * as $ from "jquery";
 import { NgxSmartModalService } from "ngx-smart-modal";
-
+// import {SocialUser ,SocialAuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import {
   FormBuilder,
   FormGroup,
@@ -12,18 +13,13 @@ import {
   FormControl,
 } from "@angular/forms";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { Observable } from "rxjs";
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
-  registerform: FormGroup;
-  searchform: FormGroup;
-  loginform: FormGroup;
-  private _opened: boolean = false;
-  register: boolean = false;
-  loginbtn: boolean = true;
   //open and close top navbar
   firstNavbarOpen = false;
   //open and close bottom navbar
@@ -31,15 +27,37 @@ export class NavbarComponent implements OnInit {
   // register submitted
   submitted = false;
   submittedLogin = false;
+  registerform: FormGroup;
+  searchform: FormGroup;
+  loginform: FormGroup;
+  private _opened: boolean = false;
+  register = false;
+  loginbtn = true;
   isLoggedIn: boolean;
   serverErrorMessages: string;
   userData;
+  allFavoCourse = [];
+  Categories = [
+    "photography",
+    "music",
+    "cooking",
+    "it & software",
+    "art",
+    "drawing",
+    "other",
+  ];
+  isShow = false;
+
+  // // social login variables
+  // userSocial:SocialUser;
+  // socialIsLoggedIn:boolean;
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     public ngxSmartModalService: NgxSmartModalService,
     private userServices: UserService,
-    private router: Router
+    private router: Router,
+    private courseService: CourseService // private authSocialService: SocialAuthService
   ) {}
 
   ngOnInit() {
@@ -97,20 +115,45 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = false;
       this.userServices.getUser().subscribe((res) => {
         this.userData = res["user"];
-        console.log(this.userData);
+        this.userServices.allFavouriteCourses = this.userData.favouriteCourses;
       });
-    } else {
-      this.isLoggedIn = true;
     }
-    console.log(this.authService.isLoggedIn());
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+
+    // this.authSocialService.authState.subscribe((user)=>{
+    //   this.userSocial=user;
+    //   this.socialIsLoggedIn = (user != null);
+    //   console.log(this.userSocial);
+    // })
   }
-  isShow = false;
 
   toggleDisplay() {
     this.isShow = !this.isShow;
   }
 
+  // showItem(item) {
+  //   switch (item) {
+  //     case "showLogin":
+  //       event.stopPropagation();
+  //       this.loginbtn = true;
+  //       this.register = false;
+  //       break;
+  //     case "showRegister":
+  //       event.stopPropagation();
+  //       this.loginbtn = false;
+  //       this.register = true;
+  //       break;
+  //     default:
+  //       event.stopPropagation();
+  //       this.loginbtn = true;
+  //       this.register = false;
+  //       break;
+  //   }
+  // }
   registerFormShow() {
+    event.stopPropagation();
     if (this.register == true) {
     } else {
       this.register = !this.register;
@@ -119,6 +162,7 @@ export class NavbarComponent implements OnInit {
   }
 
   loginFormShow() {
+    event.stopPropagation();
     if (this.loginbtn == true) {
     } else {
       this.loginbtn = !this.loginbtn;
@@ -136,6 +180,7 @@ export class NavbarComponent implements OnInit {
   // to make register first time
   registerSubmit() {
     this.submitted = true;
+    this.isLoggedIn = false;
     if (this.registerform.invalid) {
       return false;
     } else {
@@ -149,16 +194,12 @@ export class NavbarComponent implements OnInit {
           this.registerform.reset();
           this.router.navigateByUrl("/edit");
         });
-      // console.log(
-      //   this.registerform.get("emailRegister").value,
-      //   this.registerform.get("passwordRegister").value
-      // );
-      // this.isLoggedIn = false;
     }
   }
   // to login
   loginSubmit() {
     this.submittedLogin = true;
+    this.isLoggedIn = false;
     if (this.loginform.invalid) {
       return false;
     } else {
@@ -166,7 +207,19 @@ export class NavbarComponent implements OnInit {
         (res) => {
           this.authService.setToken(res["token"]);
           this.loginform.reset();
-          this.router.navigateByUrl("/edit");
+          this.userServices.getUser().subscribe((res) => {
+            this.userData = res["user"];
+            if (
+              this.userData.fullname == "" &&
+              this.userData.gender == "" &&
+              this.userData.country == "" &&
+              this.userData.city == ""
+            ) {
+              this.router.navigateByUrl("/edit");
+            } else {
+              this.router.navigateByUrl("/home");
+            }
+          });
         },
         (err) => {
           this.serverErrorMessages = err.error.message;
@@ -174,8 +227,35 @@ export class NavbarComponent implements OnInit {
       );
     }
   }
+
+  // signInWithGoogle(): void {
+  //   this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  // }
+
+  // signInWithFB(): void {
+  //   this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  // }
+
+  // signOut(): void {
+  //   this.authSocialService.signOut();
+  // }
   userLogout() {
     this.authService.deleteToken();
     this.router.navigate(["/home"]);
+    this.isLoggedIn = true;
+  }
+
+  instructorLink() {
+    this.userServices.getUser().subscribe((res) => {
+      this.userData = res["user"];
+      if ("instructor" in this.userData) {
+        this.router.navigateByUrl("/instcontrol");
+      } else {
+        this.router.navigateByUrl("/createinst");
+      }
+    });
+  }
+  searchCourse() {
+    this.router.navigate(["/search", this.searchform.get("searchInput").value]);
   }
 }

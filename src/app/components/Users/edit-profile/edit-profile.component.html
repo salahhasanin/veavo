@@ -1,3 +1,4 @@
+<!-- <app-navbar></app-navbar> -->
 <div class="container">
   <h1 class="Profile mt-5">Profile</h1>
   <div class="profileinfo">
@@ -123,12 +124,12 @@
                 >
                   <sup>*</sup>Please enter your Birthday
                 </div>
-                <div
+                <!-- <div
                   class="validall"
                   *ngIf="profileform.controls.birthday.errors?.pattern"
                 >
                   <sup>*</sup>Birthday accept dd/mm/yyyy pattern
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- <div class="form-group col-md-1"></div> -->
@@ -140,7 +141,6 @@
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="usergender"
                   id="inlineRadio1"
                   formControlName="usergender"
                   value="male"
@@ -151,10 +151,9 @@
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="usergender"
                   id="inlineRadio2"
                   formControlName="usergender"
-                  value="male"
+                  value="female"
                 />
                 <label class="form-check-label" for="inlineRadio2"
                   >Female</label
@@ -164,7 +163,6 @@
                 <input
                   class="form-check-input"
                   type="radio"
-                  name="usergender"
                   id="inlineRadio3"
                   formControlName="usergender"
                   value="other"
@@ -191,62 +189,6 @@
             </div>
           </div>
 
-          <!-- <div class="form-row mb-4 col-md-4">
-            <div class="form-group col-md-3">
-              <label for="inputState">Month</label>
-              <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="form-group col-md-3">
-              <label for="inputState">Day</label>
-              <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="form-group col-md-3">
-              <label for="inputState">Year</label>
-              <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-          </div> -->
-          <!-- <h4>Gender</h4>
-          <div class="form-row mb-4 ml-1">
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio1"
-                value="option1"
-              />
-              <label class="form-check-label" for="inlineRadio1">Male</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value="option2"
-              />
-              <label class="form-check-label" for="inlineRadio2">Female</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio3"
-                value="option3"
-              />
-              <label class="form-check-label" for="inlineRadio3">Other</label>
-            </div>
-          </div> -->
           <h4>Address</h4>
           <div class="form-row mb-3">
             <div class="form-group col-md-4">

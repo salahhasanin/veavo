@@ -1,0 +1,119 @@
+<!-- <app-navbar></app-navbar> -->
+
+<!-- <div class="container">
+<div>
+    <h2 class="my-5">INSTRUCTORS</h2>
+  </div>
+  <div class="row my-5">
+    <div
+      class="col-lg-3 col-md-6 col-xs-6 col-6"
+      *ngFor="let eachInstructor of instrucrors"
+    >
+      <div class="card instructorCard mb-5 mr-2" style="width: 14rem;">
+        <div class="cardHeader" style="height: 10rem;">
+          <div class="card-info text-center">
+            <img
+              src="{{ eachInstructor.img }}"
+              class="card-img-top rounded-circle instrucrorImg mt-2"
+              alt="..."
+              style="height: 8rem;"
+            />
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center instrucrorName">
+            {{ eachInstructor.title }}
+          </h5>
+          <p class="card-text text-center instrucrorJob">
+            {{ eachInstructor.description }}
+          </p>
+
+          <div style="text-align: center;">
+            <button class="FollowInstructor">Follow</button>
+          </div>
+          <br />
+          <div class="socialInstructor">
+            <i class="fab fa-facebook mr-2"></i>
+            <i class="fab fa-linkedin mr-2"></i>
+            <i class="fab fa-twitter-square"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="container">
+  <div>
+    <h2 class="my-5">INSTRUCTORS</h2>
+  </div>
+  <div class="row my-5">
+    <div
+      class="col-lg-3 col-md-6 col-xs-6 col-6"
+      *ngFor="let eachInstructor of allInstrucrors"
+    >
+      <div class="card instructorCard mb-5 mr-2" style="width: 14rem;">
+        <div class="cardHeader" style="height: 10rem;">
+          <div class="card-info text-center">
+            <img
+              src="{{ (eachInstructor?.userId.image)[0].url }}"
+              class="card-img-top rounded-circle instrucrorImg mt-4"
+              [routerLink]="['/instpage/', eachInstructor?._id]"
+              alt="..."
+              style="height: 8rem;"
+            />
+          </div>
+        </div>
+        <div class="card-body">
+          <h5
+            class="card-title text-center instrucrorName"
+            [routerLink]="['/instpage/', eachInstructor?._id]"
+          >
+            {{ eachInstructor?.userId.fullname }}
+          </h5>
+          <p class="card-text text-center instrucrorJob">
+            {{ eachInstructor?.jobTitle}}
+            
+           
+          </p>
+
+          <div style="text-align: center;">
+            <button class="FollowInstructor">UnFollow</button>
+          </div>
+          <br />
+          <div class="instructorSocialContact">
+            <a
+              *ngIf="eachInstructor?.socialMedia.facebook"
+              [href]="eachInstructor?.socialMedia.facebook"
+              target="_blank"
+            >
+              <i class="socialmedia mr-3 fab fa-facebook-f"></i>
+            </a>
+            <a
+              *ngIf="eachInstructor?.socialMedia.linkedin"
+              [href]="eachInstructor?.socialMedia.linkedin"
+              target="_blank"
+            >
+              <i class="socialmedia mr-3 fab fa-linkedin-in"></i>
+            </a>
+
+            <a
+              *ngIf="eachInstructor?.socialMedia.twitter"
+              [href]="eachInstructor?.socialMedia.twitter"
+              target="_blank"
+            >
+              <i class="socialmedia fab fa-twitter"></i>
+            </a>
+          </div>
+
+          <!-- <div class="socialInstructor">
+              <i class="fab fa-facebook mr-2"></i>
+              <i class="fab fa-linkedin mr-2"></i>
+              <i class="fab fa-twitter-square"></i>
+            </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- font-family: "Redressed", "Helvetica Neue", Helvetica, Arial, sans-serif; -->

@@ -10,6 +10,7 @@ import {
 } from "@angular/forms";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { HttpEvent, HttpEventType } from "@angular/common/http";
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: "app-edit-profile",
   templateUrl: "./edit-profile.component.html",
@@ -20,17 +21,17 @@ export class EditProfileComponent implements OnInit {
   submitted = false;
   preview: string;
   percentDone: any = 0;
+  userData;
+  return: string = "";
   constructor(
     public fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    // fullname city state= /^[a-zA-Z\s]*$/
-    // birthday= ^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$
-    //  phone=     /^01[0-2-5]{1}[0-9]{8}/
-
     this.profileform = this.fb.group({
       avatar: [null],
       fullname: [
@@ -46,9 +47,9 @@ export class EditProfileComponent implements OnInit {
         "",
         [
           Validators.required,
-          Validators.pattern(
-            /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
-          ),
+          // Validators.pattern(
+          //   /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+          // ),
         ],
       ],
       usergender: ["", [Validators.required]],
@@ -100,6 +101,9 @@ export class EditProfileComponent implements OnInit {
     $("#imageUpload").change(function () {
       readURL(this);
     });
+    this.route.queryParams.subscribe(
+      (params) => (this.return = params["return"] || "/profile")
+    );
   }
   uploadFile(event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -116,44 +120,27 @@ export class EditProfileComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   profileformSubmit() {
-    this.userService
-      .updateProfile(
-        "5eb3511d010e4543a49e71c2",
-        this.profileform.value.avatar,
-        this.profileform.value.fullname,
-        this.profileform.value.birthday,
-        this.profileform.value.usergender,
-        this.profileform.value.city,
-        this.profileform.value.state,
-        this.profileform.value.phone
-      )
-      .subscribe((event: HttpEvent<any>) => {
-        switch (event.type) {
-          case HttpEventType.Sent:
-            console.log("Request has been made!");
-            break;
-          case HttpEventType.ResponseHeader:
-            console.log("Response header has been received!");
-            break;
-          case HttpEventType.UploadProgress:
-            this.percentDone = Math.round((event.loaded / event.total) * 100);
-            console.log(`Uploaded! ${this.percentDone}%`);
-            break;
-          case HttpEventType.Response:
-            console.log("User successfully created!", event.body);
-            this.percentDone = false;
-          // this.router.navigate(["users-list"]);
-        }
-      });
+    if (this.authService.isLoggedIn()) {
+    this.userService.getUser().subscribe((res) => {
+      this.userData = res["user"];
+      this.userService
+        .updateProfile(
+          this.userData._id,
+          this.profileform.value.avatar,
+          this.profileform.value.fullname,
+          this.profileform.value.birthday,
+          this.profileform.value.usergender,
+          this.profileform.value.city,
+          this.profileform.value.state,
+          this.profileform.value.phone
+        )
+        .subscribe((res) => {
+          console.log(res);
+          this.router.navigateByUrl(this.return);
+        });
 
-    // console.log(
-    //   this.profileform.value.avatar,
-    //   this.profileform.value.fullname,
-    //   this.profileform.value.birthday,
-    //   this.profileform.value.usergender,
-    //   this.profileform.value.city,
-    //   this.profileform.value.state,
-    //   this.profileform.value.phone
-    // );
+      // this.router.navigateByUrl("/profile");
+    });
   }
+}
 }

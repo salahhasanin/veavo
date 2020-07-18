@@ -1,0 +1,90 @@
+$mainColor: #ff754e;
+$backgroundImge: linear-gradient($mainColor, #ff9374);
+$secondMainColor: #ffffffff;
+$textAlign: center;
+
+@import "../../../shared/Scss/course-card-style.scss";
+
+.createCourseDiv {
+  text-align: center;
+
+  .createCourse {
+    background-image: $backgroundImge;
+    border-color: $mainColor;
+    width: 500px;
+    height: 200px;
+    border: none;
+    border-radius: 7px;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .plusCircle {
+      font-size: 25px;
+    }
+
+    .createCourseText {
+      font-size: 25px;
+    }
+  }
+}
+
+.nav {
+  background-color: #716af6;
+  border: none;
+  border-radius: 7px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.nav .nav-item {
+  margin-right: -15px !important;
+}
+
+.nav .nav-item .active {
+  text-align: center;
+  color: white;
+  height: 80px;
+  background-color: #4a43db;
+  border: none;
+  font-size: 25px;
+  padding-top: 20px;
+  //   display: flex;
+  //   justify-content: center;
+  //   text-align: center;
+  //   border-radius: 7px;
+}
+
+.nav-item > a {
+  color: #c0c0c0;
+  font-size: 20px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .createCourseDiv {
+    .createCourse {
+      width: 400px;
+    }
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

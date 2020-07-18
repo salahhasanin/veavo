@@ -1,5 +1,6 @@
 import { UserService } from "./../../../services/user.service";
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
 // import * as $ from "jquery";
 
 @Component({
@@ -9,7 +10,10 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ProfileComponent implements OnInit {
   userData;
-  constructor(private userServices: UserService) {}
+  constructor(
+    private authService: AuthService,
+    private userServices: UserService
+  ) {}
 
   ngOnInit() {
     // $(document).ready(function () {
@@ -20,10 +24,10 @@ export class ProfileComponent implements OnInit {
     //     console.log(x);
     //   });
     // });
-
-    this.userServices.getUser().subscribe((res) => {
-      this.userData = res["user"];
-      console.log(this.userData);
-    });
+    if (this.authService.isLoggedIn()) {
+      this.userServices.getUser().subscribe((res) => {
+        this.userData = res["user"];
+      });
+    }
   }
 }

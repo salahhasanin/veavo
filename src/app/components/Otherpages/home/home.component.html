@@ -1,3 +1,4 @@
+<!-- <app-navbar></app-navbar> -->
 <div class="container-fluid">
   <div class="row">
     <!-- carousel section -->
@@ -50,43 +51,43 @@
     </carousel>
   </div>
 </div>
-<br />
-<div class="container">
-  <!-- search -->
-  <div class="row">
-    <div class="searchform col-lg-9 col-md-11 col-sm-12 col-11 mx-auto">
-      <form
-        class="form-inline searchFormStyle justify-content-center align-self-center"
-        [formGroup]="searchformm"
-      >
-        <div class="form-group mx-lg-3 mx-md-1 mb-sm-2">
-          <input
-            type="password"
-            class="form-control"
-            formControlName="coursecategory"
-            placeholder="What Do You Want To Learn?"
-          />
-        </div>
-        <div class="form-group mx-lg-1 mx-md-1 mb-sm-2">
-          <input
-            type="password"
-            class="form-control mr-md-5"
-            formControlName="location"
-            placeholder="Your Location"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary mx-sm-auto">
+
+<div class="row">
+  <!-- <div class="searchform searchform col-lg-9 col-md-11 col-sm-12 col-11 mx-auto"> -->
+  <div class="searchForm offset-2 col-lg-8 col-md-8 col-sm-8 col-8">
+    <form class="row pl-xl-3 pl-lg-2" [formGroup]="searchformm">
+      <div class="form-group col-lg-5 col-md-6">
+        <input
+          type="password"
+          class="form-control mr-lg-4 mr-md-1"
+          formControlName="coursecategory"
+          placeholder="Courses"
+        />
+      </div>
+      <div class="form-group col-lg-5 col-md-6">
+        <input
+          type="password"
+          class="form-control mr-md-2"
+          formControlName="location"
+          placeholder="Location"
+        />
+      </div>
+      <div class="form-group col-lg-1 col-md-12 col-sm-12 col-12 pl-lg-2">
+        <!-- <div class="searchBtnStyle"> -->
+        <button type="submit" class="btn">
           Search
         </button>
         <!-- </div> -->
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-  <!-- top rated section -->
+</div>
+
+<br />
+<div class="container">
   <div>
     <h2 class="mt-1 mb-3">TOP RATED</h2>
   </div>
-
   <owl-carousel
     id="owl"
     [options]="{
@@ -108,7 +109,7 @@
       }
     }"
     [items]="images"
-    [carouselClasses]="['owl-theme', mx - auto, 'row', 'sliding']"
+    [carouselClasses]="['owl-theme', 'mx-auto', 'row', 'sliding']"
   >
     <div class="mx-auto" *ngFor="let x of y; let i = index">
       <div class="card cardWidth mb-3">
@@ -176,6 +177,67 @@
         </div>
       </div>
     </div>
+
+    <!-- <div *ngIf="topRatedCourses">
+      <div
+        class="mx-auto"
+        *ngFor="let course of topRatedCourses; let i = index"
+      >
+        <div class="card cardWidth mb-3 mr-1">
+          <div class="circleProgress"></div>
+          <a [routerLink]="['/course/', course?._id._id]" class="coursLink">
+            <img
+              [src]="(course?._id.mainImage)[0].url"
+              class="card-img-top"
+              alt="..."
+            />
+          </a>
+          <div class="card-body cardBodyTopRated">
+            <div class="row mb-2 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course?._id._id]" class="coursLink">
+                <h5 class="card-title">{{ course?._id.courseName }}</h5>
+              </a>
+            </div>
+            <div class="row mb-1 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course?._id._id]" class="coursLink">
+                <p class="card-text">{{ course?._id.courseDescription }}</p>
+              </a>
+            </div>
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <app-rate-course
+                [courseId]="course?._id._id"
+                [courseRate]="course?._id.rate"
+              ></app-rate-course>
+            </div>
+            <br /><br />
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <p class="strikethroughPriceDiscount">
+                {{ course?._id.priviousSalary }}
+              </p>
+              <p class="Discount mx-3">{{ course?._id.salary }}</p>
+              <div class="discountBTN">
+                {{
+                  100 - (course?._id.salary / course?._id.priviousSalary) * 100
+                    | intNumber
+                }}%
+              </div>
+            </div>
+            <br />
+            <div class="row mt-4">
+              <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+              <app-favorite-button
+                class="heartStle ml-4 ml-sm-0"
+                [user]="userData"
+                [courseId]="course?._id._id"
+                (toggle)="onToggleFavorite($event)"
+              >
+              </app-favorite-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </owl-carousel>
 
   <div>
@@ -203,8 +265,67 @@
       }
     }"
     [items]="images"
-    [carouselClasses]="['owl-theme', mx - auto, 'row', 'sliding']"
+    [carouselClasses]="['owl-theme', 'mx-auto', 'row', 'sliding']"
   >
+    <!-- <div *ngIf="newCourses">
+      <div class="mx-auto" *ngFor="let course of newCourses; let i = index">
+        <div class="card cardWidth mb-3">
+          <div class="circleProgress"></div>
+          <a [routerLink]="['/course/', course._id]" class="coursLink">
+            <img
+              [src]="(course?.mainImage)[0].url"
+              class="card-img-top"
+              alt="..."
+            />
+          </a>
+          <div class="card-body cardBodyTopRated">
+            <div class="row mb-2 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course._id]" class="coursLink">
+                <h5 class="card-title">{{ course?.courseName }}</h5>
+              </a>
+            </div>
+            <div class="row mb-1 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course._id]" class="coursLink">
+                <p class="card-text">{{ course?.courseDescription }}</p>
+              </a>
+            </div>
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <app-rate-course
+                [courseId]="course?._id"
+                [courseRate]="course?.rate"
+              ></app-rate-course>
+            </div>
+            <br /><br />
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <p class="strikethroughPriceDiscount">
+                {{ course?.priviousSalary }}
+              </p>
+              <p class="Discount mx-3">{{ course?.salary }}</p>
+              <div class="discountBTN">
+                {{
+                  100 - (course?.salary / course?.priviousSalary) * 100
+                    | intNumber
+                }}%
+              </div>
+            </div>
+            <br />
+            <div class="row mt-4">
+              <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a>
+
+              <app-favorite-button
+                class="heartStle ml-4 ml-sm-0"
+                [user]="userData"
+                [courseId]="course?._id"
+                (toggle)="onToggleFavorite($event)"
+              >
+              </app-favorite-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--  -->
+    <!--  -->
     <div class="mx-auto" *ngFor="let x of y; let i = index">
       <div class="card cardWidth mb-3">
         <div class="circleProgress">
@@ -278,37 +399,59 @@
   </div>
   <div class="row my-5">
     <div
-      class="col-lg-3 col-md-6 col-xs-6 col-6"
-      *ngFor="let eachInstructor of instrucrors"
+      class="col-lg-3 col-md-6 col-xs-6 col-6 mx-auto"
+      *ngFor="let eachInstructor of topRatedInst"
     >
       <div class="card instructorCard mb-5 mr-2" style="width: 14rem;">
         <div class="cardHeader" style="height: 10rem;">
           <div class="card-info text-center">
-            <!-- rounded-circle -->
             <img
-              src="{{ eachInstructor.img }}"
-              class="card-img-top rounded-circle instrucrorImg mt-2"
+              src="{{ (eachInstructor?._id.userId.image)[0].url }}"
+              class="card-img-top rounded-circle instrucrorImg mt-4"
+              [routerLink]="['/instpage/', eachInstructor?._id._id]"
               alt="..."
               style="height: 8rem;"
             />
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title text-center instrucrorName">
-            {{ eachInstructor.title }}
+          <h5
+            class="card-title text-center instrucrorName"
+            [routerLink]="['/instpage/', eachInstructor?._id._id]"
+          >
+            {{ eachInstructor?._id.userId.fullname }}
           </h5>
           <p class="card-text text-center instrucrorJob">
-            {{ eachInstructor.description }}
+            {{ eachInstructor?._id.jobTitle }}
           </p>
 
           <div style="text-align: center;">
             <button class="FollowInstructor">Follow</button>
           </div>
           <br />
-          <div class="socialInstructor">
-            <i class="fab fa-facebook mr-2"></i>
-            <i class="fab fa-linkedin mr-2"></i>
-            <i class="fab fa-twitter-square"></i>
+          <div class="instructorSocialContact">
+            <a
+              *ngIf="eachInstructor?._id.socialMedia.facebook"
+              [href]="eachInstructor?._id.socialMedia.facebook"
+              target="_blank"
+            >
+              <i class="socialmedia mr-3 fab fa-facebook-f"></i>
+            </a>
+            <a
+              *ngIf="eachInstructor?._id.socialMedia.linkedin"
+              [href]="eachInstructor?._id.socialMedia.linkedin"
+              target="_blank"
+            >
+              <i class="socialmedia mr-3 fab fa-linkedin-in"></i>
+            </a>
+
+            <a
+              *ngIf="eachInstructor?._id.socialMedia.twitter"
+              [href]="eachInstructor?._id.socialMedia.twitter"
+              target="_blank"
+            >
+              <i class="socialmedia fab fa-twitter"></i>
+            </a>
           </div>
         </div>
       </div>

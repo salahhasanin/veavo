@@ -1,18 +1,47 @@
-import { Component, OnInit } from "@angular/core";
+import { UserService } from "src/app/services/user.service";
+import { InstructorService } from "./../../../services/instructor.service";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-inst-page",
   templateUrl: "./inst-page.component.html",
   styleUrls: ["./inst-page.component.scss"],
 })
-export class InstPageComponent implements OnInit {
+export class InstPageComponent implements OnInit, OnDestroy {
   totalRate = 1;
   fourite = [];
   indexs;
   productItem;
-  constructor() {}
+  instId: String;
+  instructorDetails: any;
+  userDetails: any;
+  allInstData: any;
+  following: any;
+  userData: any;
 
-  ngOnInit() {}
+  constructor(
+    private route: ActivatedRoute,
+    private instructorService: InstructorService,
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
+
+  ngOnInit() {
+    this.instId = this.route.snapshot.paramMap.get("instID");
+    this.allInstData = this.instructorService
+      .getInstructorData(this.instId)
+      .subscribe((res) => {
+        this.instructorDetails = res[0];
+        this.userDetails = res[1];
+      });
+      if (this.authService.isLoggedIn()) {
+    this.userService.getUser().subscribe((res) => {
+      this.userData = res["user"];
+    });
+  }
+  }
   y = [
     {
       id: 1,
@@ -152,5 +181,17 @@ export class InstPageComponent implements OnInit {
     } else {
       this.fourite.push(id);
     }
+  }
+
+  followInst() {
+    this.following = this.userService
+      .followInstructor(this.userData._id, this.instructorDetails._id)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+  ngOnDestroy() {
+    this.allInstData.unsubscribe();
+    // this.following.unsubscribe();
   }
 }

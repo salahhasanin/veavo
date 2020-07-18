@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Card Information</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="col-lg-4">Course Name:</div>
+    <div class="col-lg-8">{{ data.course.courseName }}</div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-lg-4">Course Salary:</div>
+    <div class="col-lg-8">{{ data.course.salary }}</div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-4 fillCard">Fill Your Card:</div>
+  </div>
+  <div class="col-lg-12 mt-2">
+    <div id="card-element" class="field stripeCardStyle"></div>
+    <!-- <div #payElement></div> -->
+  </div>
+  <div class="offset-4 col-lg-4 mt-2">
+    <button class="bookButton" (click)="buy()">Book</button>
+  </div>
+</div>

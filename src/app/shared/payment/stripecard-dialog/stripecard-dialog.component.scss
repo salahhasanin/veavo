@@ -1,0 +1,19 @@
+$mainColor: #ff754e;
+$secondMainColor: #ffffffff;
+.stripeCardStyle {
+  width: 300px;
+}
+.bookButton {
+  background-color: $mainColor;
+  color: $secondMainColor;
+  width: 110px;
+  border-color: $mainColor;
+  border-radius: 7px;
+  height: 45px;
+  font-size: 17px;
+}
+
+.fillCard {
+  font-weight: bold;
+  font-size: 15px;
+}

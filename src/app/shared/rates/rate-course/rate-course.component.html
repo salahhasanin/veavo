@@ -1,0 +1,10 @@
+<ngx-stars
+  [readonly]="false"
+  [size]="2"
+  [color]="'#FDCC0D'"
+  [initialStars]="courseRate | avgRate: 'rateValue'"
+  [customStarIcons]="heartIcons"
+  (ratingOutput)="onRatingSet($event)"
+></ngx-stars>
+
+<!-- [initialStars]="{{ courseRate | avgRate:'rateValue' }}" -->

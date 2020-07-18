@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { UserService } from "src/app/services/user.service";
+import { AuthService } from "src/app/services/auth.service";
 // import { StarRatingComponent } from "ng-starrating";
 @Component({
   selector: "app-favourit-courses",
@@ -8,11 +10,30 @@ import { Component, OnInit } from "@angular/core";
 export class FavouritCoursesComponent implements OnInit {
   totalRate = 1;
   fourite = [];
+  userFavourite: any;
   indexs;
   productItem;
-  constructor() {}
+  userData: any;
+  allCourses: [];
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.userService.getUser().subscribe((res) => {
+        this.userData = res["user"];
+        this.userService
+          .getUserFavouritCourses(this.userData._id)
+          .subscribe((res) => {
+            this.userFavourite = res;
+            this.allCourses = this.userFavourite.favouriteCourses;
+          });
+      });
+    }
+  }
+
   y = [
     {
       id: 1,
@@ -138,11 +159,6 @@ export class FavouritCoursesComponent implements OnInit {
     },
   ];
 
-  onRatingSet($event) {
-    this.totalRate = $event;
-    // alert(`Rating is ${$event}`);
-  }
-
   addFavourite(id, index) {
     console.log(index);
     this.indexs = index;
@@ -152,5 +168,13 @@ export class FavouritCoursesComponent implements OnInit {
     } else {
       this.fourite.push(id);
     }
+  }
+  removeFavourite(courseId) {
+    console.log(courseId);
+    this.userService
+      .removeFavouritCourse(this.userData._id, courseId)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }

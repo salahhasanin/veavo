@@ -7,6 +7,11 @@ export const environment = {
   instBaseUrl: "http://localhost:4000/inst",
   authBaseUrl: "http://localhost:4000/auth",
   userBaseUrl: "http://localhost:4000/user",
+  courseBaseUrl: "http://localhost:4000/course",
+  stripePublish_key: "pk_test_PD9i0uvMBBy1to3zR8QdFR7x",
+  facebookAppId: "254991581875975",
+  googleClientApi:
+    "931940237699-3vu7jctcrf8i4utuc9cuotdbulc667ek.apps.googleusercontent.com",
 };
 
 /*

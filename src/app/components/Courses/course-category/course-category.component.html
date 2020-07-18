@@ -1,6 +1,6 @@
-<!-- <div class="container-fluid"> -->
+<!-- <app-navbar></app-navbar> -->
 <div class="container mb-2">
-  <h2 class="subcategoryHeader mb-2 mt-5">PHOTOGRAPHY</h2>
+  <h2 class="subcategoryHeader mb-2 mt-5">{{ categoryName | uppercase }}</h2>
   <br />
   <div class="subcategoryDetails mb-4">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -13,6 +13,7 @@
           role="tab"
           aria-controls="pills-home"
           aria-selected="true"
+          (click)="sortPrice('allCourses')"
           >All Courses</a
         >
       </li>
@@ -49,7 +50,8 @@
           role="tab"
           aria-controls="pills-contact"
           aria-selected="false"
-          >Newest</a
+          (click)="sortPrice('createdAt')"
+          >Closest</a
         >
       </li>
       <li class="nav-item">
@@ -61,6 +63,7 @@
           role="tab"
           aria-controls="pills-contact"
           aria-selected="false"
+          (click)="sortPrice('lowPrice')"
           >Lowest Price</a
         >
       </li>
@@ -73,6 +76,7 @@
           role="tab"
           aria-controls="pills-contact"
           aria-selected="false"
+          (click)="sortPrice('highPrice')"
           >Highest Price</a
         >
       </li>
@@ -99,7 +103,7 @@
     </div>
   </div>
 
-  <div class="row mt-3">
+  <!-- <div class="row mt-3">
     <div
       class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
       *ngFor="let x of y; let i = index"
@@ -169,6 +173,111 @@
         </div>
       </div>
     </div>
+  </div> -->
+
+  <!-- <div *ngIf="courses$ | async as allCourses"> -->
+  <div *ngIf="allCourses">
+    <div class="row mt-3">
+      <div
+        class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mx-auto"
+        *ngFor="let course of allCourses; let i = index"
+      >
+        <div class="card cardWidth mb-3">
+          <div class="circleProgress">
+            <!-- <circle-progress
+        [percent]="x.coursRegistration"
+        [radius]="6"
+        [outerStrokeWidth]="1"
+        [innerStrokeWidth]="1"
+        [space]="-1"
+        [outerStrokeColor]="'#ff754e'"
+        [innerStrokeColor]="'#e7e8ea'"
+        [titleColor]="'#fff'"
+        [unitsColor]="'#fff'"
+        [titleFontSize]="4"
+        [unitsFontSize]="4"
+        [showSubtitle]="false"
+        [animation]="true"
+        [animationDuration]="100"
+        [startFromZero]="false"
+        [responsive]="true"
+      ></circle-progress> -->
+          </div>
+          <a [routerLink]="['/course/', course._id]" class="coursLink">
+            <!-- <a (click)="goToCourseDetails(course._id)" class="coursLink"> -->
+            <img
+              [src]="(course?.mainImage)[0].url"
+              class="card-img-top"
+              alt="..."
+            />
+          </a>
+          <div class="card-body cardBodyTopRated">
+            <div class="row mb-2 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course._id]" class="coursLink">
+                <!-- <a (click)="goToCourseDetails(course._id)" class="coursLink"> -->
+                <h5 class="card-title">{{ course?.courseName }}</h5>
+              </a>
+            </div>
+            <div class="row mb-1 ml-1 ml-sm-0">
+              <a [routerLink]="['/course/', course._id]" class="coursLink">
+                <!-- <a (click)="goToCourseDetails(course._id)" class="coursLink"> -->
+                <p class="card-text">{{ course?.courseDescription }}</p>
+              </a>
+            </div>
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <!-- <ngx-stars
+                [readonly]="false"
+                [size]="2"
+                [color]="'#FDCC0D'"
+                [initialStars]="totalRate"
+                [customStarIcons]="heartIcons"
+                (ratingOutput)="onRatingSet($event)"
+              ></ngx-stars> -->
+              <app-rate-course
+                [courseId]="course?._id"
+                [courseRate]="course?.rate"
+              ></app-rate-course>
+            </div>
+            <br /><br />
+            <div class="row mt-1 ml-1 ml-sm-0">
+              <p class="strikethroughPriceDiscount">
+                {{ course?.priviousSalary }}
+              </p>
+              <p class="Discount mx-3">{{ course?.salary }}</p>
+              <div *ngIf="course?.priviousSalary">
+                <div class="discountBTN">
+                  {{
+                    100 - (course?.salary / course?.priviousSalary) * 100
+                      | intNumber
+                  }}%off
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row mt-4">
+              <!-- <a href="#" class="btn btn-primary bookNow mr-3">BOOK NOW</a> -->
+              <!-- <app-book-button
+                class="btn btn-primary bookNow mr-3"
+                [coursename]="course?.courseName"
+              > -->
+              <!-- [userId]="userData._id" -->
+              <app-book-button
+                class="btn btn-primary bookNow mr-3"
+                [course]="course"
+                [user]="userData"
+              >
+              </app-book-button>
+              <app-favorite-button
+                class="heartStle ml-4 ml-sm-0"
+                [user]="userData"
+                [courseId]="course?._id"
+                (toggle)="onToggleFavorite($event)"
+              >
+              </app-favorite-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<!-- </div> -->

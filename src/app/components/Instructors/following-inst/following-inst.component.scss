@@ -1,0 +1,69 @@
+$mainColor: #ff754e;
+$secondMainColor: #ffffffff;
+$backgroundImge: linear-gradient($mainColor, #ff9374);
+$textAlign: center;
+
+/*
+   //////////////////////////////
+*/
+.instructorCard {
+    border: none;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.instrucrorImg {
+    border-radius: 50%;
+    width: 180px;
+    cursor: pointer;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.instrucrorName {
+    font-weight: bold;
+    font-size: 20px;
+    height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.instrucrorJob {
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+}
+
+.FollowInstructor {
+    text-align: $textAlign;
+    background-image: $backgroundImge;
+    color: $secondMainColor;
+    border: $mainColor;
+    border-radius: 10px;
+    font-size: 11;
+    width: 130px;
+    height: 40px;
+}
+
+// .socialInstructor {
+//     text-align: $textAlign;
+//     font-size: 30px;
+//     border-radius: 10px;
+// }
+
+.instructorSocialContact {
+    text-align: $textAlign;
+    font-size: 30px;
+    border-radius: 10px;
+}

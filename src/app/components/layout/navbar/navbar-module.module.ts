@@ -5,7 +5,7 @@ import { NgxSmartModalModule } from "ngx-smart-modal";
 import {
   MatSidenavModule,
   MatToolbarModule,
-  MatIconModule
+  MatIconModule,
 } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
 
@@ -13,12 +13,12 @@ import { ReactiveFormsModule } from "@angular/forms";
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
-    NgxSmartModalModule.forRoot(),
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    ReactiveFormsModule
+    // NgxSmartModalModule.forRoot(),
+    // MatSidenavModule,
+    // MatToolbarModule,
+    // MatIconModule,
+    // ReactiveFormsModule
   ],
-  exports: []
+  exports: [],
 })
 export class NavbarModuleModule {}

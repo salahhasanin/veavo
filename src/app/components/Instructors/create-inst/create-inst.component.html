@@ -1,0 +1,47 @@
+<!-- <app-navbar></app-navbar> -->
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-horizontal-stepper>
+    <mat-step *ngFor="let step of steps; let index = index; let last = last">
+      <ng-template matStepLabel>{{ step.label }}</ng-template>
+      <formly-form
+        [form]="form.at(index)"
+        [model]="model"
+        [fields]="step.fields"
+        [options]="options[index]"
+      >
+      </formly-form>
+
+      <div>
+        <button
+          *ngIf="index !== 0"
+          matStepperPrevious
+          class="btn backBtn"
+          type="button"
+          (click)="prevStep(index)"
+        >
+          Back
+        </button>
+        <button
+          *ngIf="!last"
+          matStepperNext
+          class="btn nextBtn"
+          type="button"
+          [disabled]="!form.at(index).valid"
+          (click)="nextStep(index)"
+        >
+          Next
+        </button>
+        <div class="divSubmit">
+          <button
+            *ngIf="last"
+            class="btn submitBtn"
+            [disabled]="!form.valid"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>

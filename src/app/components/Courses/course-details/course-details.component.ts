@@ -1,4 +1,10 @@
+import { UserService } from "./../../../services/user.service";
 import { Component, OnInit } from "@angular/core";
+import { CourseService } from "src/app/services/course.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Course } from "src/app/shared/models/course.model";
+import { decode } from "punycode";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-course-details",
@@ -7,11 +13,49 @@ import { Component, OnInit } from "@angular/core";
 })
 export class CourseDetailsComponent implements OnInit {
   fourite = [];
-  indexs;
-  productItem;
-  constructor() {}
+  indexs: any;
+  productItem: any;
+  coursId: any;
+  course: any;
+  instructorDetails: any;
+  relatedCourses: any;
+  userDetails: any;
+  learnPoint = true;
+  prerequists = false;
+  comments = false;
+  instructor = false;
+  related = false;
+  userData: any;
+  courset: Course;
 
-  ngOnInit() {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private courseService: CourseService,
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
+
+  ngOnInit() {
+    this.coursId = this.route.snapshot.paramMap.get("courseId");
+    // this.coursId = decode(this.coursIdbeforeDecoded);
+    // this.coursId = this.courseService.accessCourseId;
+    // this.courseService.courseIdEmitter.subscribe((msg) => {
+    //   this.coursId = msg;
+    // });
+
+    this.courseService.getCourse(this.coursId).subscribe((res) => {
+      this.course = res[0];
+      this.instructorDetails = res[1];
+      this.userDetails = res[2];
+      this.relatedCourses = res[3];
+    });
+    if (this.authService.isLoggedIn()) {
+      this.userService.getUser().subscribe((res) => {
+        this.userData = res["user"];
+      });
+    }
+  }
 
   y = [
     {
@@ -113,16 +157,25 @@ export class CourseDetailsComponent implements OnInit {
     },
   ];
 
-  mainCourseAddFavourite(id) {
-    if (this.fourite.indexOf(id) !== -1) {
-      this.productItem = this.fourite.indexOf(id);
-      this.fourite.splice(this.productItem, 1);
-    } else {
-      this.fourite.push(id);
-    }
-  }
+  // mainCourseAddFavourite(id) {
+  //   if (this.fourite.indexOf(id) !== -1) {
+  //     this.productItem = this.fourite.indexOf(id);
+  //     this.fourite.splice(this.productItem, 1);
+  //     this.userService
+  //       .removeFavouritCourse(this.userData._id, id)
+  //       .subscribe((res) => {
+  //         console.log(res);
+  //       });
+  //   } else {
+  //     this.fourite.push(id);
+  //     this.userService
+  //       .addFavouritCourse(this.userData._id, id)
+  //       .subscribe((res) => {
+  //         console.log(res);
+  //       });
+  //   }
+  // }
   addFavourite(id, index) {
-    console.log(index);
     this.indexs = index;
     if (this.fourite.indexOf(id) !== -1) {
       this.productItem = this.fourite.indexOf(id);
@@ -131,4 +184,65 @@ export class CourseDetailsComponent implements OnInit {
       this.fourite.push(id);
     }
   }
+
+  showItem(item) {
+    switch (item) {
+      case "learnPoint":
+        this.learnPoint = true;
+        this.prerequists = false;
+        this.comments = false;
+        this.instructor = false;
+        this.related = false;
+        break;
+      case "prerequists":
+        this.learnPoint = false;
+        this.prerequists = true;
+        this.comments = false;
+        this.instructor = false;
+        this.related = false;
+        break;
+      case "comments":
+        this.learnPoint = false;
+        this.prerequists = false;
+        this.comments = true;
+        this.instructor = false;
+        this.related = false;
+        break;
+      case "instructor":
+        this.learnPoint = false;
+        this.prerequists = false;
+        this.comments = false;
+        this.instructor = true;
+        this.related = false;
+        break;
+      case "related":
+        this.learnPoint = false;
+        this.prerequists = false;
+        this.comments = false;
+        this.instructor = false;
+        this.related = true;
+        break;
+      default:
+        this.learnPoint = true;
+        this.prerequists = false;
+        this.comments = false;
+        this.instructor = false;
+        this.related = false;
+        break;
+    }
+  }
+
+  onToggleFavorite(favorited: boolean) {
+    // this.courset.favorited = favorited;
+    console.log(favorited);
+    // if (favorited) {
+    //   this.article.favoritesCount++;
+    // } else {
+    //   this.article.favoritesCount--;
+    // }
+  }
+  // goToCourseDetails(course_Id) {
+  //   this.courseService.accessCourseId = course_Id;
+  //   this.router.navigate(["/course/corsedetails"]);
+  // }
 }

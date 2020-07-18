@@ -22,7 +22,8 @@ export class AuthGuard implements CanActivate {
       this.router.navigateByUrl("/home");
       this.authService.deleteToken();
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 }
